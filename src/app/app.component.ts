@@ -1,19 +1,19 @@
-import { Constants } from './constants';
-import { PracticeAPIService } from './API/practice-api.service';
 import { Component } from '@angular/core';
-import {Http, Response} from '@angular/http';
-import 'rxjs/add/operator/map';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `<h2>{{getTitle()}}</h2>
+  <ul>
+  <li *ngFor="let data of course">
+  {{data}}
+  </li>
+  </ul>
+  `
 })
 export class AppComponent {
-  title = 'Practice Session';
-  data: any = {};
+  title = 'Practice Session'; 
+  course = ["Course1", "Course2", "Course3"];
 
-constructor(private http : Http){
-
-}
-
-}
+  getTitle(){
+    return this.title;
+  }
+} 
