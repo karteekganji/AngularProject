@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
-  template: `<h2>{{getTitle()}}</h2>
-  <ul>
-  <li *ngFor="let data of course">
-  {{data}}
-  </li>
-  </ul>
-  `
+  templateUrl: './app.component.html', 
 })
 export class AppComponent {
   title = 'Practice Session'; 
-  course = ["Course1", "Course2", "Course3"];
-
+  course = ["Course2", "Course2", "Course2"];
   getTitle(){
     return this.title;
   }
+
+  greet():void { 
+    console.log("Hello World!!!") 
+ } 
+ 
 } 
