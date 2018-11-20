@@ -1,3 +1,27 @@
-<div>
-    <h1>Practice Project</h1>
+
+ <div style="text-align:center">
+    <h3>Welcome to {{title | json}}</h3>
 </div>
+
+<div> Months :
+    <select (change) = "changeFunction($event)">
+       <option *ngFor="let data of months">{{data}}</option>
+    </select>
+ </div>
+
+ <div *ngIf = "course != null  && courseDisplay; then condition1 else condition2"> Courses :
+    <ng-template #condition1><select>
+       <option *ngFor="let data of course">{{data}}</option> <!--If & Then Condition-->
+    </select></ng-template>
+ </div>
+ <ng-template #condition2>courseDisplay is False</ng-template> <!--Else Condition-->
+
+<app-login></app-login> <!--calling component-->
+
+<button (click)="clickFunction($event)"> <!--Event handling-->
+    Click Here
+</button>
+
+
+<p><a routerLink = "login-cmp">Login component</a></p>
+<router-outlet></router-outlet>
