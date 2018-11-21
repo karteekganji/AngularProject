@@ -1,4 +1,6 @@
+import { PracticeServicesService } from './practice-services.service';
 import { Component } from '@angular/core';
+import { map } from 'rxjs-compat/operator/map';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html', 
@@ -11,10 +13,12 @@ export class AppComponent {
   months = ["January", "Feburary", "March", "April", "May", 
   "June", "July", "August", "September",
   "October", "November", "December"];
+  booksList=[];
+  todaydate;
+  constructor(public myservice: PracticeServicesService) {}
   getTitle(){
     return this.title;
   }
-
   clickFunction(event){
     alert("Click function alert!!")
     console.log(event)
@@ -24,6 +28,8 @@ export class AppComponent {
   }
   greet():void { 
     console.log("Hello World!!!") 
- } 
- 
-} 
+ }
+ ngOnInit() {
+  
+}
+}

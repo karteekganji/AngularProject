@@ -1,6 +1,6 @@
 
  <div style="text-align:center">
-    <h3>Welcome to {{title | json}}</h3>
+    <h3>Welcome to {{title | json}}</h3> <!--Pipes-->
 </div>
 
 <div> Months :
@@ -8,7 +8,9 @@
        <option *ngFor="let data of months">{{data}}</option>
     </select>
  </div>
-
+<ul>
+    <li *ngFor="let data of getAllBooks"></li>
+</ul>
  <div *ngIf = "course != null  && courseDisplay; then condition1 else condition2"> Courses :
     <ng-template #condition1><select>
        <option *ngFor="let data of course">{{data}}</option> <!--If & Then Condition-->
@@ -25,3 +27,4 @@
 
 <p><a routerLink = "login-cmp">Login component</a></p>
 <router-outlet></router-outlet>
+
