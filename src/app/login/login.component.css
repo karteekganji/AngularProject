@@ -1,0 +1,25 @@
+
+input.login {
+    background-color: #e0e0e0;
+    color: black;
+    padding: 14px 41px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+}
+input.login:hover{
+    color: black;
+    border: 2px solid rgb(122, 221, 228);
+}
+.dropdownLogin {
+    background-color: #e0e0e0;
+    color: black;
+    padding: 14px 0px 12px 10px;
+    margin: 9px 17px 14px -7px;
+    border: none;
+    border-radius: 4px;
+}
+.dropdownLogin:hover{
+    color: black;
+    border: 2px solid rgb(122, 221, 228);
+}

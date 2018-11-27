@@ -14,8 +14,20 @@ export class PracticeServicesService {
   ngOnInit() {
    
   }
+  public static practiceApiList = {
+    getCities : "get-cities",
+    getAllBooks : "get-all-books",
+    login :"login",
+    getLibraries :"get-all-library",
+  }
+
   getService(url){
-    return this.http.get(this.baseUrl+url).
-    map(response =>  response.json())
+    return this.http.get(this.baseUrl+url)
+    .map(response =>  response.json())
+  }
+  postService(url, data){
+    console.log(data)
+    return this.http.post(this.baseUrl+url,data)
+    .map(response => response.json())
   }
 }

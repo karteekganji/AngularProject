@@ -1,0 +1,16 @@
+<h4>Libraries available at : {{getCity()}}</h4>
+
+<table *ngIf = "librariesList.length">
+  <tr>
+    <th>S.No</th>
+    <th>Name</th>
+    <th>Address</th>
+  </tr>
+  <tr *ngFor = "let data of librariesList" >
+      <th>1</th>
+    <th>{{data.name}}</th>
+    <th>{{data.address}}</th>
+
+  </tr>
+</table>
+ 

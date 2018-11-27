@@ -1,39 +1,6 @@
-
  <div style="text-align:center">
-    <h3>{{title}}</h3> <!--Pipes-->
+    <h3>{{title}}</h3> 
 </div>
+<!-- <app-login></app-login> -->
 
-<div> Months :
-    <select (change) = "changeFunction()">
-       <option *ngFor="let data of months">{{data}}</option>
-    </select>
- </div>
-
- <div *ngIf = "course != null  && courseDisplay; then condition1 else condition2"> Courses :
-    <ng-template #condition1><select>
-       <option *ngFor="let data of course">{{data}}</option> <!--If & Then Condition-->
-    </select></ng-template>
- </div>
- <ng-template #condition2>courseDisplay is False</ng-template> <!--Else Condition-->
-
-<app-login></app-login> <!--calling component-->
-
-<button (click)="clickFunction($event)"> <!--Event handling-->
-    Click Here
-</button>
-
-<ul *ngFor = "let data of booksList">
-    <li>Books Title : {{data.title}}</li>
- </ul>
-
-<p><a routerLink = "login-cmp">Login component</a></p>
 <router-outlet></router-outlet>
-
-<form style="text-align:center" #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin.value)" >
-    <input type = "text" name = "emailid" placeholder = "email Id" ngModel>
-    <br/>
-    <input type = "password" name = "passwd" placeholder = "password" ngModel>
-    <br/>
-    <input type = "submit" value = "submit">
- </form>
-

@@ -1,7 +1,17 @@
-<p>
-  {{title}}
-</p>
+<div style="text-align:center">
+  <form [formGroup]="formdata" (ngSubmit) = "login(formdata.value)" >
+     <input class = "login" type="text"  name="email" placeholder="username" 
+        formControlName="email">
+     <br/>
+     
+     <input class = "login" type="password"  name="password" 
+        placeholder="password" formControlName="password">
+     <br/>
 
-<p>
-  Login-Component Works!
-</p>
+     <select class = "dropdownLogin" formControlName="cityName">
+      <option *ngFor="let city of citiesList" [value]="city.cityName">{{city.cityName}}</option>
+    </select>
+     
+     <input class = "login" type="submit" value="Login">
+  </form>
+</div>
