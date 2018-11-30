@@ -1,16 +1,19 @@
-<h4>Libraries available at : {{getCity()}}</h4>
 
-<table *ngIf = "librariesList.length">
+<h4 class = "alignCenter"> Libraries available at : {{getCity()}}</h4>
+
+<table align=center *ngIf = "librariesList.length">
+    <thead>
   <tr>
     <th>S.No</th>
     <th>Name</th>
     <th>Address</th>
   </tr>
-  <tr *ngFor = "let data of librariesList" >
-      <th>1</th>
-    <th>{{data.name}}</th>
-    <th>{{data.address}}</th>
-
+</thead>
+<tbody>
+  <tr *ngFor = "let data of librariesList; let i = index" >
+      <td>{{i+1}}</td>
+    <td><i (click) = "getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+    <td>{{data.address}}</td>
   </tr>
+</tbody>
 </table>
- 

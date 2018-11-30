@@ -19,6 +19,7 @@ export class PracticeServicesService {
     getAllBooks : "get-all-books",
     login :"login",
     getLibraries :"get-all-library",
+    getLibraryBooks :"library-books/",
   }
 
   getService(url){

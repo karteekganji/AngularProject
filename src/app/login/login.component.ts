@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("Role",response.payLoad.userDetails.role)
       localStorage.setItem("City",data.cityName)
       this.librariesList = response.payLoad.libraries;
-      alert("Login Success!!")
       this.router.navigateByUrl('dashboard');
     }else{
      alert("Login Failed!!")

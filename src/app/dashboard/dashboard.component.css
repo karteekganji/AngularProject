@@ -12,3 +12,11 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+.alignCenter {
+    text-align: center;
+}
+i {
+    color:rgb(13, 105, 224);
+    text-decoration: underline;
+    font-weight: bold;
+}
