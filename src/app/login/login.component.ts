@@ -21,17 +21,20 @@ export class LoginComponent implements OnInit {
   cityName;
   email;
   formdata;
-    
-  form: FormGroup;
 
   ngOnInit() {
     this.getCities();
+   this.loginData();
+  }
+
+  loginData(){
     this.formdata = new FormGroup({
       email: new FormControl("mzemxxie@spring.com"),
       password: new FormControl("spring@123"),
       cityName : new FormControl("HYDERABAD")
    });
   }
+
   getCities(){
     return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
       this.citiesList = respose.payLoad;
@@ -49,7 +52,10 @@ export class LoginComponent implements OnInit {
      alert("Login Failed!!")
     }
   })
- 
+ }
+
+ signUp(){
+   this.router.navigateByUrl("signup")
  }
 
 }

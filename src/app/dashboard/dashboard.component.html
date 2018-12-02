@@ -10,7 +10,7 @@
   </tr>
 </thead>
 <tbody>
-  <tr *ngFor = "let data of librariesList; let i = index" >
+  <tr *ngFor = "let data of librariesList; index as i" >
       <td>{{i+1}}</td>
     <td><i (click) = "getAllLibraryBooks(data.id)">{{data.name}}</i></td>
     <td>{{data.address}}</td>

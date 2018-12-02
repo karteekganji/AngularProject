@@ -23,3 +23,9 @@ input.login:hover{
     color: black;
     border: 2px solid rgb(122, 221, 228);
 }
+.signUp {
+    color:rgb(13, 105, 224);
+    font-weight: bold;
+}.signUp:hover{
+    text-decoration: underline;
+}

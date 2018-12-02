@@ -1,0 +1,22 @@
+<div class="modal">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+  <form [formGroup]="formdata" (ngSubmit) = "signUp(formdata.value)" >
+  <input type="text"  name="email" placeholder="username" 
+     formControlName="email">
+  <br/>
+  
+  <input  type="password"  name="password" 
+     placeholder="password" formControlName="password">
+  <br/>
+  <input  type="text"  name="name" 
+     placeholder="name" formControlName="name">
+  <br/>
+  <input  type="text"  name="mobileNumber" 
+  placeholder="mobile number" formControlName="mobileNumber">
+  <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+</form>
+</div>

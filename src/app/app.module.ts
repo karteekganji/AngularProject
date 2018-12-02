@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BooksComponent } from './books/books.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { BooksComponent } from './books/books.component';
     LoginComponent,
     DashboardComponent,
     BooksComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
