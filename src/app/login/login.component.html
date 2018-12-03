@@ -1,19 +1,19 @@
-<div style="text-align:center">
-  <form [formGroup]="formdata" (ngSubmit) = "login(formdata.value)" >
-     <input class = "login" type="text"  name="email" placeholder="username" 
-        formControlName="email">
-     <br/>
-     
-     <input class = "login" type="password"  name="password" 
-        placeholder="password" formControlName="password">
-     <br/>
+<div align="center">
+  <form class="login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
+    <input type="text" name="email" placeholder="username" formControlName="email">
+    <br />
 
-     <select class = "dropdownLogin" formControlName="cityName">
+    <input type="password" name="password" placeholder="password" formControlName="password">
+    <br />
+
+    <select class="dropdownLogin" formControlName="cityName">
       <option *ngFor="let city of citiesList" [value]="city.cityName">{{city.cityName}}</option>
     </select>
-     
-     <input class = "login" type="submit" value="Login">
+
+    <input type="submit" value="Login">
   </form>
-  <div> <p>New user?</p>
-   <button class="signUp" (click)="signUp()">  Sign Up here</button></div>
+</div>
+<div class="alignpara">
+  <p>New user? &nbsp; </p>
+  <p class="signUp" (click)="signUp()">Sign Up here</p>
 </div>

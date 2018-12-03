@@ -55,11 +55,11 @@ color:white;
     top: 0;
     width: 50%;
     text-align: center; /* Full width */
-    height: 100%; /* Full height */
+    height: 81.5%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: #474e5d;
     padding-top: 50px;
-    margin: 50px 341px
+    margin: 67px 0px 0px 25%;
 }
 
 /* Modal Content/Box */
