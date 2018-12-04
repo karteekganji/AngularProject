@@ -12,6 +12,9 @@ import { BooksComponent } from './books/books.component';
 import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+ // import alert service and component
+ import { AlertsComponent, AlertsService } from 'angular-alert-module';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { FooterComponent } from './footer/footer.component';
     SignupComponent,
     HeaderComponent,
     FooterComponent,
+    AlertsComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,7 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [PracticeServicesService,LoginComponent,DashboardComponent],
+  providers: [PracticeServicesService,LoginComponent,DashboardComponent, AlertsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

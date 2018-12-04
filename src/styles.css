@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     margin: 0px !important;
+    overflow: auto;
 }
 input[type=text], input[type=password] {
     width: 50%;
@@ -67,12 +68,12 @@ select:focus {
 /* The Modal (background) */
 .modal {
 color:rgb(3, 3, 3);
-    position: fixed; /* Stay in place */
-    z-index: 0; /* Sit on top */
+    /* position: fixed; Stay in place */
+    /* z-index: 0; Sit on top */
     width: 30%;
     text-align: center; /* Full width */
   /* Full height  height: 100%; */
-    overflow: auto; /* Enable scroll if needed */
+ /* Enable scroll if needed */
     background-color: #d3d6db;
     margin: 14px 0% 0% 35%;
     padding-bottom: 18px;
@@ -114,4 +115,8 @@ hr {
     content: "";
     clear: both;
     display: table;
+}
+@media screen and (max-width:1000px) {
+    
+    
 }

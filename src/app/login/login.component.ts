@@ -5,6 +5,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.librariesList = response.payLoad.libraries;
         this.router.navigateByUrl('dashboard');
       } else {
-        alert("Login Failed!!")
+       alert("Login Failed");
       }
     })
   }
