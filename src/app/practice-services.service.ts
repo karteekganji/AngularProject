@@ -14,6 +14,7 @@ export class PracticeServicesService {
   ngOnInit() {
    
   }
+  public static citiesList :any = [];
   public static practiceApiList = {
     getCities : "get-cities",
     getAllBooks : "get-all-books",

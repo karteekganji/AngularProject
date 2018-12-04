@@ -12,19 +12,17 @@ import { FormGroup, FormControl, Validators, FormBuilder }
 export class AppComponent implements OnInit{
   title = 'Library App'; 
   constructor(public myservice: PracticeServicesService, private http: Http) {}
-  booksList:any=[];
-
   form: FormGroup;
   ngOnInit() {
-   
+   this.getCities();
   }
   greet():void { 
     console.log("Hello World!!!") 
  }
 
-getAllBooks(){
-  return this.myservice.getService(PracticeServicesService.practiceApiList.getAllBooks).subscribe(respose => {
-    this.booksList = respose.payLoad;
+ getCities(){
+  return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
+    PracticeServicesService.citiesList = respose.payLoad;
   });
 }
 
