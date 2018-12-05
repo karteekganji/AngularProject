@@ -12,10 +12,9 @@ import { BooksComponent } from './books/books.component';
 import { SignupComponent } from './signup/signup.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
- // import alert service and component
- import { AlertsComponent, AlertsService } from 'angular-alert-module';
-
-
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,16 +24,19 @@ import { FooterComponent } from './footer/footer.component';
     SignupComponent,
     HeaderComponent,
     FooterComponent,
-    AlertsComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+    }),
   ],
-  providers: [PracticeServicesService,LoginComponent,DashboardComponent, AlertsService],
+  providers: [PracticeServicesService,LoginComponent,DashboardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

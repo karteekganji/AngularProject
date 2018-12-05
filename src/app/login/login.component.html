@@ -3,7 +3,7 @@
   <form class="login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
     <input type="text" name="email" placeholder="username" formControlName="email">
     <input type="password" name="password" placeholder="password" formControlName="password">
-    <select class="dropdownLogin" formControlName="cityName">
+    <select formControlName="cityName">
       <option *ngFor="let city of getCities()" [value]="city.cityName">{{city.cityName}}</option>
     </select>
     <div class="clearfix">

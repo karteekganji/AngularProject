@@ -4,6 +4,7 @@ import { map } from 'rxjs-compat/operator/map';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } 
     from '@angular/forms';
+  import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html', 
@@ -11,10 +12,14 @@ import { FormGroup, FormControl, Validators, FormBuilder }
 })
 export class AppComponent implements OnInit{
   title = 'Library App'; 
-  constructor(public myservice: PracticeServicesService, private http: Http) {}
+  constructor(public myservice: PracticeServicesService, private http: Http, private toastr:ToastrService) {}
   form: FormGroup;
   ngOnInit() {
    this.getCities();
+   setTimeout(() => {
+    
+  }, 500);
+  
   }
   greet():void { 
     console.log("Hello World!!!") 

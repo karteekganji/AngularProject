@@ -59,7 +59,9 @@ select:focus {
 .cancelbtn, .submitbtn {
   width: 27%;
 }
-
+.submitbtn:disabled{
+    opacity: 0.65;
+}
 /* Add padding to container elements */
 .container {
     padding: 16px;
@@ -116,6 +118,12 @@ hr {
     clear: both;
     display: table;
 }
+
+.alertValalidation{
+    margin: -2% 0% 0px 0px;
+     color:red !important;
+    }
+
 @media screen and (max-width:1000px) {
     
     

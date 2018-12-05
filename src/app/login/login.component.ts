@@ -12,17 +12,10 @@ import { FormGroup, FormControl, Validators, FormBuilder }
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  title = 'Library App';
   constructor(public myservice: PracticeServicesService, private http: Http, private router: Router) { }
-  booksList: any = [];
-  citiesList: any = [];
   librariesList: any = [];
-  cityName;
-  email;
   formdata;
   ngOnInit() {
-
     this.loginData();
   }
 
