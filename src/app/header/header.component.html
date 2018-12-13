@@ -1,5 +1,6 @@
 <html><body>
   <header class="header">
+    <button *ngIf = "auth" (click)="logOut()">Logout</button>
     <img class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
     <h3>LIBRARY </h3>
   </header>

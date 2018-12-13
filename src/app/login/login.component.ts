@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs-compat/operator/map';
@@ -12,7 +13,7 @@ import { FormGroup, FormControl, Validators, FormBuilder }
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router) { }
+  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router, private toastr:ToastrService) { }
   librariesList: any = [];
   formdata;
   ngOnInit() {
@@ -34,13 +35,14 @@ export class LoginComponent implements OnInit {
   login(data) {
     this.myservice.postService(PracticeServicesService.practiceApiList.login, data).subscribe(response => {
       if (response.status == "SUCCESS") {
-        localStorage.setItem("X-Authorization", response.payLoad.userDetails.auth)
+        localStorage.setItem("Auth-Token", response.payLoad.userDetails.auth)
         localStorage.setItem("Role", response.payLoad.userDetails.role)
         localStorage.setItem("City", data.cityName)
         this.librariesList = response.payLoad.libraries;
+        this.toastr.success("Login Successfull")
         this.router.navigateByUrl('dashboard');
       } else {
-       alert("Login Failed");
+        this.toastr.error(response.errorMessage)
       }
     })
   }

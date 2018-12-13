@@ -26,16 +26,17 @@ export class PracticeServicesService {
     getLibraries :"get-all-library",
     getLibraryBooks :"library-books/",
     signUp :"signup",
+    logOut :"logout?auth=",
   }
 
   getService(url){
     return this.http.get(this.baseUrl+url)
-    .map(response =>  response.json()).catch(this.handleError);
+    .map(response =>  response.json())
   }
   postService(url, data){
     console.log(data)
     return this.http.post(this.baseUrl+url,data)
-    .map(response =>response.json());
+    .map(response =>response.json())
   
   }
 
@@ -47,7 +48,6 @@ private handleError(error: Response | any) {
       } else if (error.status === 500) {
         errorMessage = "Something went wrong from server side.. Please try again later", "Error!";
       }
-      const body = error.json() || "";
       errorMessage = "Error";
     }
 

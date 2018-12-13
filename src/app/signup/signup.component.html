@@ -23,21 +23,22 @@
                 Password is required.
             </div>
             <select formControlName="cityName">
-                <option *ngFor="let city of getCities()" [value]="city.cityName">{{city.cityName}}</option>
+                <option [ngValue]="null">Select City</option>
+                <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
             </select>
             <div class="alertValalidation" *ngIf="formdata.get('cityName').touched && formdata.get('cityName').hasError('required')">
                 City is required.
             </div>
             <select formControlName="gender">
-                <option [ngValue]="undefined" disabled  selected> Please select one option </option>
-                <option *ngFor="let gender of getGenders" [value]="gender">{{gender}}</option>
+                <option [ngValue]="null">Select Gender</option>
+                <option *ngFor="let gender of getGenders" [value]="">{{gender}}</option>
             </select>
             <div class="alertValalidation" *ngIf="formdata.get('gender').touched && formdata.get('gender').hasError('required')">
                 Gender is required.
             </div>
             <div class="clearfix">
                 <button type="button" class="cancelbtn">Cancel</button>
-                <button [disabled]="formdata.invalid" type="submit" class="submitbtn">Signup</button>
+                <button [disabled]="formdata.invalid" type="submit" class="buttonGreen submitbtn">Signup</button>
             </div>
         </form>
     </div>

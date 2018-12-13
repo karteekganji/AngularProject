@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
@@ -11,8 +12,8 @@ import { PracticeServicesService } from './../practice-services.service';
 })
 export class SignupComponent implements OnInit {
   formdata;
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router) { }
-  getGenders: any = ["Male", "Female", "Others"];
+  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router,private toastr:ToastrService) { }
+  getGenders: any = ["MALE", "FEMALE", "OTHERS"];
   ngOnInit() {
     this.signUpData();
   }
@@ -26,15 +27,16 @@ export class SignupComponent implements OnInit {
       ),
       cityName: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
-
+      role:new FormControl('USER')
     });
   }
   signUp(data) {
     this.myservice.postService(PracticeServicesService.practiceApiList.signUp, data).subscribe(response => {
       if (response.status == "SUCCESS") {
-        alert("SignUp Success")
+        this.toastr.success("Registration succesfully completed")
+        this.router.navigateByUrl('')
       } else {
-        alert("SignUp Failed!!")
+        this.toastr.error(response.errorMessage)
       }
     })
   }
