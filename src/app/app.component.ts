@@ -24,7 +24,6 @@ export class AppComponent implements OnInit{
   greet():void { 
     console.log("Hello World!!!") 
  }
-
  getCities(){
   return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
     PracticeServicesService.citiesList = respose.payLoad;

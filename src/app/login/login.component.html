@@ -1,11 +1,8 @@
 <div class="modal" align="center">
   <h2>Login</h2>
   <form class="login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
-    <input type="text" name="email" placeholder="username" formControlName="email">
+    <input type="text" name="email" placeholder="username" formControlName="email"> 
     <input type="password" name="password" placeholder="password" formControlName="password">
-    <select formControlName="cityName">
-      <option *ngFor="let city of getCities()" [value]="city.cityName">{{city.cityName}}</option>
-    </select>
     <div class="clearfix">
       <button type="button" (click) = "signUp()" class="cancelbtn"> Signup </button>
       <button type="submit" class="submitbtn buttonGreen"> Login </button>

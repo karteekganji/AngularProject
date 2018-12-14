@@ -1,7 +1,17 @@
-<html><body>
-  <header class="header">
-    <button *ngIf = "auth" (click)="logOut()">Logout</button>
-    <img class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
-    <h3>LIBRARY </h3>
+<html>
+
+<body>
+  <header>
+    <div class="navbar">
+      <img class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
+      <div class="nav-right">
+        <button *ngIf="myservice.isLogin()" (click)="logOut()">Logout<i class="material-icons">
+            power_settings_new
+          </i></button>
+      </div>
+    </div>
+
   </header>
-</body></html>
+</body>
+
+</html>

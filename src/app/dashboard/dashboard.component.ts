@@ -12,27 +12,23 @@ import { Injectable } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  librariesList:any=[];
-  libraryBooksList:any=[];
-  constructor(private myservice :PracticeServicesService, private loginComp :LoginComponent, private router : Router) {}
+  librariesList: any = [];
+  constructor(private myservice: PracticeServicesService, private loginComp: LoginComponent, private router: Router) { }
   ngOnInit() {
-    this.getLibraries();
+
   }
 
-  getLibraries(){
- this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries+"?cityName="+localStorage.getItem("City")).subscribe(response =>{
-   this.librariesList = response.payLoad;
- })
-  }
-  getCity(){
-    return localStorage.getItem("City");
-  }
-  getAllLibraryBooks(libraryId) { 
-    
-    this.myservice.getService(PracticeServicesService.practiceApiList.getLibraryBooks+libraryId).subscribe(response => {
-    this.libraryBooksList = response.payLoad;
-    this.router.navigateByUrl("books")
+  getLibraries(event) {
+    this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
+      this.librariesList = response.payLoad;
     })
- }
+  }
 
+  getAllLibraryBooks(libraryId) {
+      this.router.navigateByUrl("books?libId="+libraryId)
+    }
+  
+  getCities() {
+    return PracticeServicesService.citiesList;
+  }
 }

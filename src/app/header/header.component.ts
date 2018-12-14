@@ -1,3 +1,4 @@
+import { AppComponent } from './../app.component';
 import { ToastrService } from 'ngx-toastr';
 import { Http } from '@angular/http';
 import { PracticeServicesService } from './../practice-services.service';
@@ -11,20 +12,22 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router, private toastr:ToastrService) { }
-  auth: string;
+  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
+  auth: any;
+
   ngOnInit() {
     this.auth = localStorage.getItem("Auth-Token");
-    console.log(this.auth)
+  }
+  authtoken():string{
+    return localStorage.getItem("Auth-Token")
   }
   logOut(data) {
-    this.myservice.postService(PracticeServicesService.practiceApiList.logOut+this.auth,data).subscribe(response => {
+    this.myservice.postService(PracticeServicesService.practiceApiList.logOut + this.authtoken(), data).subscribe(response => {
       if (response.status == "SUCCESS") {
         this.toastr.success(response.errorMessage)
         localStorage.clear()
-        this.auth = null
         this.router.navigateByUrl('')
-      }else{
+      } else {
         this.toastr.error(response.errorMessage)
       }
     })

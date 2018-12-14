@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
   loginData() {
     this.formdata = new FormGroup({
       email: new FormControl("mzemxxie@spring.com"),
-      password: new FormControl("spring@123"),
-      cityName: new FormControl("HYDERABAD")
+      password: new FormControl("spring@123")
     });
   }
 
@@ -37,7 +36,6 @@ export class LoginComponent implements OnInit {
       if (response.status == "SUCCESS") {
         localStorage.setItem("Auth-Token", response.payLoad.userDetails.auth)
         localStorage.setItem("Role", response.payLoad.userDetails.role)
-        localStorage.setItem("City", data.cityName)
         this.librariesList = response.payLoad.libraries;
         this.toastr.success("Login Successfull")
         this.router.navigateByUrl('dashboard');

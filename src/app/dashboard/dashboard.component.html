@@ -1,5 +1,8 @@
 
-<h4 class = "alignCenter"> Libraries available at : {{getCity()}}</h4>
+<h4 class = "alignCenter"> Select your location : <select class="css1" (change) = getLibraries($event)>
+  <option disabled selected [ngValue]="undefined"> Select City</option>
+  <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+</select></h4>
 
 <table align=center *ngIf = "librariesList.length">
     <thead>

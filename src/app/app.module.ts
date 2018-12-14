@@ -1,3 +1,4 @@
+import { by } from 'protractor';
 import { PracticeServicesService } from './practice-services.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,10 +35,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
     ToastrModule.forRoot({
     }),
   ],
-  providers: [PracticeServicesService,LoginComponent,DashboardComponent],
+  providers: [PracticeServicesService,LoginComponent,DashboardComponent,BooksComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

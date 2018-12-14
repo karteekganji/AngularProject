@@ -39,6 +39,13 @@ export class PracticeServicesService {
     .map(response =>response.json())
   
   }
+  isLogin(){
+    if (localStorage.getItem("Auth-Token")) {
+      return true;
+    }else {
+      return false;
+    }
+  }
 
 private handleError(error: Response | any) {
     let errorMessage: string;

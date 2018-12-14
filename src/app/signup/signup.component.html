@@ -23,14 +23,14 @@
                 Password is required.
             </div>
             <select formControlName="cityName">
-                <option [ngValue]="null">Select City</option>
+                <option [ngValue]="undefined">Select City</option>
                 <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
             </select>
             <div class="alertValalidation" *ngIf="formdata.get('cityName').touched && formdata.get('cityName').hasError('required')">
                 City is required.
             </div>
             <select formControlName="gender">
-                <option [ngValue]="null">Select Gender</option>
+                <option [ngValue]="undefined">Select Gender</option>
                 <option *ngFor="let gender of getGenders" [value]="">{{gender}}</option>
             </select>
             <div class="alertValalidation" *ngIf="formdata.get('gender').touched && formdata.get('gender').hasError('required')">
