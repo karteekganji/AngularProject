@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder }
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { PracticeServicesService } from './../practice-services.service';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -12,7 +13,9 @@ import { PracticeServicesService } from './../practice-services.service';
 })
 export class SignupComponent implements OnInit {
   formdata;
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router,private toastr:ToastrService) { }
+  constructor(public myservice: PracticeServicesService,
+     private http: Http, private router: Router,
+     private appcomp:AppComponent, private toastr:ToastrService) { }
   getGenders: any = ["MALE", "FEMALE", "OTHERS"];
   ngOnInit() {
     this.signUpData();
@@ -42,6 +45,6 @@ export class SignupComponent implements OnInit {
   }
 
   getCities() {
-    return PracticeServicesService.citiesList;
+    return this.appcomp.citiesList;
   }
 }

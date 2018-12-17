@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +14,7 @@ import { Injectable } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   librariesList: any = [];
-  constructor(private myservice: PracticeServicesService, private loginComp: LoginComponent, private router: Router) { }
+  constructor(private appcomp:AppComponent,private myservice: PracticeServicesService, private loginComp: LoginComponent, private router: Router) { }
   ngOnInit() {
 
   }
@@ -29,6 +30,6 @@ export class DashboardComponent implements OnInit {
     }
   
   getCities() {
-    return PracticeServicesService.citiesList;
+    return this.appcomp.citiesList;
   }
 }

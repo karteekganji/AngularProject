@@ -20,9 +20,6 @@ export class LoginComponent implements OnInit {
     this.loginData();
   }
 
-  getCities() {
-    return PracticeServicesService.citiesList;
-  }
 
   loginData() {
     this.formdata = new FormGroup({
