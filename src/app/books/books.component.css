@@ -32,3 +32,17 @@
     background-color: #666;
     color: white;
   }
+  .clrRed{
+    color: red;
+    text-align: center;
+  }
+  .back{
+    font-weight: bold;
+    margin: 15px 0px 10px 0px;
+  } 
+
+  .back button{
+    padding: 0px 3px;
+    margin-left: 36px;
+    background-color: #d01407;
+  }

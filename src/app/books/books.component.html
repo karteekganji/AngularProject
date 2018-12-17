@@ -1,6 +1,11 @@
-<h4 align=center>Books Available at : {{libraryName}}</h4>
-<form class="login" [formGroup]="formData" (ngSubmit)="addBooksToCart(formData.value)">
-<table align=center *ngIf="libraryBooksList.length">
+<div class="back" align=center>
+  <span>Books Available at : {{libraryName}}</span>
+  <button (click)="goBack()">
+    <i class="material-icons">
+      reply
+    </i>Back</button>
+</div>
+<table align=center *ngIf="libraryBooksList.length; else message">
   <thead>
     <tr>
       <th>S.No</th>
@@ -15,7 +20,7 @@
   <tbody>
     <tr *ngFor="let data of libraryBooksList; index as i">
       <td>{{i+1}}</td>
-      <td> <input type="checkbox" formControlName="bookId"> {{data.title}} </td>
+      <td> {{data.title}} </td>
       <td>{{data.languageName}}</td>
       <td>{{data.authorName}}</td>
       <td>{{data.categoryName}}</td>
@@ -25,8 +30,6 @@
   </tbody>
 </table>
 
-    <!-- <button type="button" (click) = "displayAddedBooks($event)" class=""> Add To Cart </button> -->
-
-
-</form>
-
+<ng-template #message>
+  <h3 class="clrRed">No Books available in this Library!</h3>
+</ng-template>

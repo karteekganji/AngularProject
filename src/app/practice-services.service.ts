@@ -19,7 +19,7 @@ export class PracticeServicesService {
   
   }
   public static practiceApiList = {
-    getCities : "get-citie",
+    getCities : "get-cities",
     getAllBooks : "get-all-books",
     login :"login",
     getLibraries :"get-all-library",

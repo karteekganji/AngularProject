@@ -17,11 +17,13 @@ export class BooksComponent implements OnInit {
   libraryBooksList: any = [];
   formData;
   constructor(private router: Router, private actRoter: ActivatedRoute, private myService: PracticeServicesService) {
+   
+  }
+  ngOnInit() {
+    
     this.actRoter.queryParams.subscribe(params => {
       this.libId = params['libId'];
     });
-  }
-  ngOnInit() {
     this.data();
     this.getAllLibraryBooks();
   }
@@ -37,6 +39,9 @@ export class BooksComponent implements OnInit {
       this.libraryBooksList = responce.payLoad.bookDetails;
       this.libraryName = responce.payLoad.libraryDetails;
     })
+  }
+  goBack(){
+    this.router.navigateByUrl("dashboard");
   }
   displayAddedBooks(event){
 
