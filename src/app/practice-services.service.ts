@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { HttpClient
+import { HttpClient, HttpErrorResponse
 } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -47,18 +47,8 @@ export class PracticeServicesService {
     }
   }
 
-private handleError(error: Response | any) {
-    let errorMessage: string;
-    if (error instanceof Response) {
-      if (error.status === 403) {
-        setTimeout(() => { }, 1000);
-      } else if (error.status === 500) {
-        errorMessage = "Something went wrong from server side.. Please try again later", "Error!";
-      }
-      errorMessage = "Error";
-    }
-
-    return Observable.throw(errorMessage);
+ handleError(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server Error");
   }
 
 }

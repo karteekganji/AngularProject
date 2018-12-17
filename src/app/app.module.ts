@@ -1,32 +1,27 @@
-import { by } from 'protractor';
-import { PracticeServicesService } from './practice-services.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import {ReactiveFormsModule} from "@angular/forms";
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AppRoutingModule } from './app-routing.module';
-import { BooksComponent } from './books/books.component';
-import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from "@angular/forms";
+import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PracticeServicesService } from './practice-services.service';
+import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
+import { LoginGaurdService } from './route-gaurd/login-gaurd.service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    BooksComponent,
-    SignupComponent,
+    RoutingComponent,
     HeaderComponent,
     FooterComponent,
-    
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +34,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ToastrModule.forRoot({
     }),
   ],
-  providers: [PracticeServicesService,LoginComponent,DashboardComponent,BooksComponent],
+  providers: [RoutingComponent,PracticeServicesService,HomeGaurdService,LoginGaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
