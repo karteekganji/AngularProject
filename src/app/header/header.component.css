@@ -9,7 +9,9 @@
     background-color: #555;
     overflow: auto;
   }
-  
+  img:hover{
+    cursor: pointer;
+  }
   .navbar button {
     float: left;
     padding: 6px;

@@ -3,7 +3,7 @@
 <body>
   <header>
     <div class="navbar">
-      <img class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
+      <img (click) = "imgClick()" class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
       <div class="nav-right">
         <button *ngIf="myservice.isLogin()" (click)="logOut()">Logout<i class="material-icons">
             power_settings_new

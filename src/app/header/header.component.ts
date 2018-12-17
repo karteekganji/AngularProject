@@ -21,6 +21,9 @@ export class HeaderComponent implements OnInit {
   authtoken():string{
     return localStorage.getItem("Auth-Token")
   }
+  imgClick(){
+    this.router.navigateByUrl('')
+  }
   logOut(data) {
     this.myservice.postService(PracticeServicesService.practiceApiList.logOut + this.authtoken(), data).subscribe(response => {
       if (response.status == "SUCCESS") {

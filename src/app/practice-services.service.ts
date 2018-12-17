@@ -45,17 +45,7 @@ export class PracticeServicesService {
     }
   }
 
-public handleError(error: HttpErrorResponse) {
-    // let errorMessage: string;
-    // if (error instanceof Response) {
-    //   if (error.status === 403) {
-    //     setTimeout(() => { }, 1000);
-    //   } else if (error.status === 500) {
-    //     errorMessage = "Something went wrong from server side.. Please try again later", "Error!";
-    //   }
-    //   errorMessage = "Error";
-    // }
-
-    return Observable.throw(error.message);
+ handleError(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server Error");
   }
 }

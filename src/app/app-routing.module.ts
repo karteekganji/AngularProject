@@ -5,12 +5,17 @@ import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignupComponent } from './signup/signup.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
+import {LoginGaurdService} from './route-gaurd/login-gaurd.service';
+
 
 const appRoutes: Routes = [
-  {path : '',component : LoginComponent},
-  {path : 'dashboard',component : DashboardComponent},
-  {path : 'books',component : BooksComponent},
-  {path : 'signup',component : SignupComponent},
+  {path : '',component : LoginComponent,canActivate: [HomeGaurdService]},
+  {path : 'dashboard',component : DashboardComponent,canActivate: [LoginGaurdService]},
+  {path : 'books',component : BooksComponent,canActivate: [LoginGaurdService]},
+  {path : 'signup',component : SignupComponent,canActivate: [HomeGaurdService]},
+  {path : '**',component : PageNotFoundComponent},
 ];
 
 @NgModule({
@@ -26,3 +31,4 @@ const appRoutes: Routes = [
   declarations: []
 })
 export class AppRoutingModule { }
+export const RoutingComponent = [LoginComponent,DashboardComponent,BooksComponent,SignupComponent,PageNotFoundComponent]
