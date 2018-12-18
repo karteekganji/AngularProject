@@ -2,9 +2,6 @@ import { Router } from '@angular/router';
 import { LoginComponent } from './../login/login.component';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
-import { Injectable } from '@angular/core';
 import { AppComponent } from '../app.component';
 
 @Component({

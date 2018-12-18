@@ -1,11 +1,22 @@
-<div class="modal" align="center">
-  <h2>Login</h2>
-  <form class="login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
-    <input type="text" name="email" placeholder="username" formControlName="email"> 
-    <input type="password" name="password" placeholder="password" formControlName="password">
-    <div class="clearfix">
-      <button type="button" (click) = "signUp()" class="cancelbtn"> Signup </button>
-      <button type="submit" class="submitbtn buttonGreen"> Login </button>
+<div class="container">
+  <div class="app-form">
+    <div class="main-div">
+      <div class="panel">
+        <h2>Login</h2>
+        <p>Please enter your email and password</p>
+      </div>
+      <form id="Login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
+        <div class="form-group">
+          <input type="email" class="form-control" id="inputEmail" formControlName="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="inputPassword" formControlName="password" placeholder="Password">
+        </div>
+        <div class="forgot">
+          <a (click)="signUp()">Create account</a> or <a href="#">Forgot password</a>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
     </div>
-  </form>
+  </div>
 </div>

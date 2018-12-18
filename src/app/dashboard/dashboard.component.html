@@ -1,22 +1,23 @@
-
-<h4 class = "alignCenter"> Select your location : <select class="css1" (change) = getLibraries($event)>
-  <option disabled selected [ngValue]="undefined"> Select City</option>
-  <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
-</select></h4>
-
-<table align=center *ngIf = "librariesList.length">
-    <thead>
-  <tr>
-    <th>S.No</th>
-    <th>Name</th>
-    <th>Address</th>
-  </tr>
-</thead>
-<tbody>
-  <tr *ngFor = "let data of librariesList; index as i" >
+<div class="form-inline form-group">
+  <p class="alignCenter"> Select your location : </p>
+  <select class="form-control css1" (change)=getLibraries($event)>
+    <option disabled selected [ngValue]="undefined"> Select City</option>
+    <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+  </select>
+</div>
+<table datatable *ngIf="librariesList.length">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Name</th>
+      <th>Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of librariesList; index as i">
       <td>{{i+1}}</td>
-    <td><i (click) = "getAllLibraryBooks(data.id)">{{data.name}}</i></td>
-    <td>{{data.address}}</td>
-  </tr>
-</tbody>
+      <td><i (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+      <td>{{data.address}}</td>
+    </tr>
+  </tbody>
 </table>

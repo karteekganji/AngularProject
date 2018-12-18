@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PracticeServicesService } from './practice-services.service';
 import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
 import { LoginGaurdService } from './route-gaurd/login-gaurd.service';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { LoginGaurdService } from './route-gaurd/login-gaurd.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    DataTablesModule,
     ToastrModule.forRoot({
     }),
   ],

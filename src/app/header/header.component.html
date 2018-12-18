@@ -1,17 +1,17 @@
-<html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">LIBRARY</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<body>
-  <header>
-    <div class="navbar">
-      <img (click) = "imgClick()" class="headerimg" src="src/assets/images/library_books.png" alt="logo" />
-      <div class="nav-right">
-        <button *ngIf="myservice.isLogin()" (click)="logOut()">Logout<i class="material-icons">
-            power_settings_new
-          </i></button>
-      </div>
+    <div *ngIf="authtoken()" class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+      </ul>
     </div>
-
-  </header>
-</body>
-
-</html>
+    <form *ngIf="authtoken()" class="form-inline">
+        <button (click)="logOut()" class="btn btn-outline-info my-2 my-sm-0" type="submit">Logout</button>
+      </form>
+  </nav>

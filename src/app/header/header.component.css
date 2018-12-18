@@ -3,32 +3,26 @@
     height: 50px;
     margin: 0% 0% 0% 46%;
   }
-
-  .navbar {
+  .navbarcustom {
     width: 100%;
     background-color: #555;
-    overflow: auto;
+    padding: 8px;
   }
   img:hover{
     cursor: pointer;
   }
-  .navbar button {
+  .navbarcustom button {
     float: left;
-    padding: 6px;
     color: white;
     text-decoration: none;
     font-size: 17px;
-    margin: 9px;
     background-color: #d01407;
   }
-  
-  .navbar button:hover {
+  h3 {
+    text-align: center;
+  }
+  .navbarcustom button:hover {
     background-color: #000;
   }
-  
-  .active {
-    background-color: #4CAF50;
-  }
-  .nav-right{
-    float: right
-  }
+
+ 

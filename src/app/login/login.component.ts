@@ -1,8 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs-compat/operator/map';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
@@ -13,7 +11,7 @@ import { FormGroup, FormControl, Validators, FormBuilder }
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router, private toastr:ToastrService) { }
+  constructor(public myservice: PracticeServicesService, private router: Router, private toastr:ToastrService) { }
   librariesList: any = [];
   formdata;
   ngOnInit() {

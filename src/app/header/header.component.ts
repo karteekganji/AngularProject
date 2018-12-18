@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public myservice: PracticeServicesService, private http: Http, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
+  constructor(public myservice: PracticeServicesService, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
   auth: any;
 
   ngOnInit() {

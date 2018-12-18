@@ -2,17 +2,11 @@
 .alignCenter {
     text-align: center;
 }
-i {
-    color:rgb(13, 105, 224);
-    text-decoration: underline;
-    font-weight: bold;
-    cursor: pointer;
-}
 .css1{
-    width: 10%;
-    padding: 10px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
+    width: 8%;
+}
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
 }
