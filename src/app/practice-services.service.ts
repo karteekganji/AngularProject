@@ -1,13 +1,12 @@
 import { Constants } from './constants';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
 import {
   HttpClient, HttpErrorResponse, HttpHeaders
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs/operators';
 @Injectable()
 export class PracticeServicesService {
   httpdata;
@@ -19,13 +18,13 @@ export class PracticeServicesService {
 
   }
   public static practiceApiList = {
-    getCities: "get-cities",
-    getAllBooks: "get-all-books",
-    login: "login",
-    getLibraries: "get-all-library",
-    getLibraryBooks: "library-books/",
-    signUp: "signup",
-    logOut: "logout?auth=",
+    getCities: "api/get-cities",
+    getAllBooks: "api/get-all-books",
+    login: "api/login",
+    getLibraries: "api/get-all-library",
+    getLibraryBooks: "api/library-books/",
+    signUp: "api/signup",
+    logOut: "api/logout?auth=",
   }
 
   getService(url) {
@@ -36,18 +35,25 @@ export class PracticeServicesService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
+        'Auth-Token': localStorageVariable
       })
     };
-    return this.http.get(this.baseUrl + url, httpOptions).map((response) => {
-      return response;
-    }).catch(this.handleError);
+    console.log(httpOptions)
+    return this.http.get(this.baseUrl + url, httpOptions).pipe(map((response: any) => response.json()));
   }
   postService(url, data) {
+    var localStorageVariable = '';
+    if (localStorage.getItem('Auth-Token')) {
+      localStorageVariable = localStorage.getItem('Auth-Token');
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Auth-Token': localStorageVariable
+      })
+    };
     console.log(data)
-    return this.http.post(this.baseUrl + url, data)
-      .map((response) => { 
-        return response }).catch(this.handleError);
+    return this.http.post(this.baseUrl + url, data,httpOptions).pipe(map((response: any) => response.json()));
   }
   isLogin() {
     if (localStorage.getItem("Auth-Token")) {

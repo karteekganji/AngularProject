@@ -1,8 +1,6 @@
-import { AppComponent } from './../app.component';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PracticeServicesService } from './../practice-services.service';
-import { DashboardComponent } from './../dashboard/dashboard.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

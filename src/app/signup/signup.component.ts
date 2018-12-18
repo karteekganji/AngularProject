@@ -2,7 +2,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { PracticeServicesService } from './../practice-services.service';
 import { AppComponent } from '../app.component';
@@ -13,8 +12,7 @@ import { AppComponent } from '../app.component';
 })
 export class SignupComponent implements OnInit {
   formdata;
-  constructor(public myservice: PracticeServicesService,
-     private http: Http, private router: Router,
+  constructor(public myservice: PracticeServicesService, private router: Router,
      private appcomp:AppComponent, private toastr:ToastrService) { }
   getGenders: any = ["MALE", "FEMALE", "OTHERS"];
   ngOnInit() {

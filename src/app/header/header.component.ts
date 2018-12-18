@@ -1,6 +1,5 @@
 import { AppComponent } from './../app.component';
 import { ToastrService } from 'ngx-toastr';
-import { Http } from '@angular/http';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

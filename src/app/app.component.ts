@@ -1,7 +1,5 @@
 import { PracticeServicesService } from './practice-services.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs-compat/operator/map';
-import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } 
     from '@angular/forms';
   import { ToastrService } from 'ngx-toastr';
@@ -12,7 +10,7 @@ import { FormGroup, FormControl, Validators, FormBuilder }
 })
 export class AppComponent implements OnInit{
   title = 'Library App'; 
-  constructor(public myservice: PracticeServicesService, private http: Http, private toastr:ToastrService) {}
+  constructor(public myservice: PracticeServicesService, private toastr:ToastrService) {}
   form: FormGroup;
   public citiesList :any = [];
   public errorMessage;
