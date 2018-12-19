@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('')
   }
   logOut(data) {
-    this.myservice.postService(PracticeServicesService.practiceApiList.logOut + this.authtoken(), data).subscribe(response => {
+    this.myservice.postService(PracticeServicesService.practiceApiList.logOut, data).subscribe(response => {
       if (response.status == "SUCCESS") {
         this.toastr.success(response.errorMessage)
         localStorage.clear()

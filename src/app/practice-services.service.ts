@@ -18,13 +18,13 @@ export class PracticeServicesService {
 
   }
   public static practiceApiList = {
-    getCities: "api/get-cities",
-    getAllBooks: "api/get-all-books",
-    login: "api/login",
-    getLibraries: "api/get-all-library",
-    getLibraryBooks: "api/library-books/",
-    signUp: "api/signup",
-    logOut: "api/logout?auth=",
+    getCities: "get-cities",
+    getAllBooks: "get-all-books",
+    login: "login",
+    getLibraries: "get-all-library",
+    getLibraryBooks: "library-books/",
+    signUp: "signup",
+    logOut: "logout",
   }
 
   getService(url) {
@@ -39,7 +39,7 @@ export class PracticeServicesService {
       })
     };
     console.log(httpOptions)
-    return this.http.get(this.baseUrl + url, httpOptions).pipe(map((response: any) => response.json()));
+    return this.http.get(this.baseUrl + url, httpOptions).pipe(map((response: any) => response));
   }
   postService(url, data) {
     var localStorageVariable = '';
@@ -53,7 +53,7 @@ export class PracticeServicesService {
       })
     };
     console.log(data)
-    return this.http.post(this.baseUrl + url, data,httpOptions).pipe(map((response: any) => response.json()));
+    return this.http.post(this.baseUrl + url, data,httpOptions).pipe(map((response: any) => response));
   }
   isLogin() {
     if (localStorage.getItem("Auth-Token")) {
