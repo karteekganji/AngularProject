@@ -38,7 +38,6 @@ export class PracticeServicesService {
         'Auth-Token': localStorageVariable
       })
     };
-    console.log(httpOptions)
     return this.http.get(this.baseUrl + url, httpOptions).pipe(map((response: any) => response));
   }
   postService(url, data) {

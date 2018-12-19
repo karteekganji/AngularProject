@@ -1,12 +1,23 @@
-
-.alignCenter {
-    text-align: center;
+.alignCenter{
+    margin: 0%;
 }
 .css1{
-    width: 8%;
+    width: 9%;
+    margin: 2% 1%;
 }
 .form-inline {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+}
+.containeralign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.linkcss {
+color: blue;
+}
+.linkcss:hover{
+    text-decoration: underline;
 }

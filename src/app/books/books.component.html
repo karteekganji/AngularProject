@@ -1,11 +1,11 @@
 <div class="back" align=center>
   <span>Books Available at : {{libraryName}}</span>
-  <button (click)="goBack()">
+  <button class="btn btn-outline-info my-2 my-sm-0" (click)="goBack()">
     <i class="material-icons">
       reply
     </i>Back</button>
 </div>
-<table align=center *ngIf="libraryBooksList.length; else message">
+<table datatable *ngIf="libraryBooksList.length; else message">
   <thead>
     <tr>
       <th>S.No</th>

@@ -65,4 +65,6 @@
   table tr:hover {
         background-color: #bcbfc4;
   }
-
+  .alertValalidation{
+color:red;
+  }

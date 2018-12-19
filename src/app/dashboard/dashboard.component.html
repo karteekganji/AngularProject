@@ -1,4 +1,4 @@
-<div class="form-inline form-group">
+<div class="containeralign form-group">
   <p class="alignCenter"> Select your location : </p>
   <select class="form-control css1" (change)=getLibraries($event)>
     <option disabled selected [ngValue]="undefined"> Select City</option>
@@ -16,7 +16,7 @@
   <tbody>
     <tr *ngFor="let data of librariesList; index as i">
       <td>{{i+1}}</td>
-      <td><i (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+      <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
       <td>{{data.address}}</td>
     </tr>
   </tbody>
