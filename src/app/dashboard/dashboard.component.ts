@@ -11,11 +11,11 @@ import { AppComponent } from '../app.component';
 })
 export class DashboardComponent implements OnInit {
   librariesList: any = [];
+  user_role:string;
   constructor(private appcomp:AppComponent,private myservice: PracticeServicesService, private loginComp: LoginComponent, private router: Router) { }
   ngOnInit() {
-
+  this.user_role = localStorage.getItem("Role");
   }
-
   getLibraries(event) {
     this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
       this.librariesList = response.payLoad;

@@ -24,5 +24,8 @@
   .navbarcustom button:hover {
     background-color: #000;
   }
+  .navbar-brand-font{
+    font-weight: 900;
+  }
 
  
