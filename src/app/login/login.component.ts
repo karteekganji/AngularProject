@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
 
   loginData() {
     this.formdata = new FormGroup({
-      email: new FormControl("mzemxxie@spring.com"),
-      password: new FormControl("spring@123")
+      email: new FormControl("email@admin.com"),
+      password: new FormControl("admin")
     });
   }
 

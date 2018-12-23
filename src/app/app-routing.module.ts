@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
 import {LoginGaurdService} from './route-gaurd/login-gaurd.service';
+import { LibraryComponent } from './library/library.component';
 
 
 const appRoutes: Routes = [
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
   {path : 'dashboard',component : DashboardComponent,canActivate: [LoginGaurdService]},
   {path : 'books',component : BooksComponent,canActivate: [LoginGaurdService]},
   {path : 'signup',component : SignupComponent,canActivate: [HomeGaurdService]},
+  {path : 'library',component : LibraryComponent,canActivate: [LoginGaurdService]},
   {path : '**',component : PageNotFoundComponent},
 ];
 
@@ -31,4 +33,4 @@ const appRoutes: Routes = [
   declarations: []
 })
 export class AppRoutingModule { }
-export const RoutingComponent = [LoginComponent,DashboardComponent,BooksComponent,SignupComponent,PageNotFoundComponent]
+export const RoutingComponent = [LoginComponent,DashboardComponent,BooksComponent,SignupComponent,LibraryComponent,PageNotFoundComponent]

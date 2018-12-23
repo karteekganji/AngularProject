@@ -1,7 +1,6 @@
 .headerimg{
     width: 50px;
     height: 50px;
-    margin: 0% 0% 0% 46%;
   }
   .navbarcustom {
     width: 100%;
@@ -28,4 +27,41 @@
     font-weight: 900;
   }
 
+  
+/* Menus */
+nav > .nav.nav-tabs{
+
+  border: none;
+    color:#fff;
+    background:#272e38;
+    border-radius:0;
+
+}
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active
+{
+  border: none;
+    color:#fff;
+    background:#272e38;
+    border-radius:0;
+}
+
+nav > div a.nav-item.nav-link.active:after
+ {
+  content: "";
+  position: relative;
+  bottom: -60px;
+  left: -31%;
+  border: 15px solid transparent;
+  border-top-color: #17a2b8 ;
+}
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link:focus
+{
+  border: none;
+    background: #17a2b8;
+    color:#fff;
+    border-radius:0;
+    transition:background 0.20s linear;
+}
  

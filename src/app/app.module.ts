@@ -15,6 +15,10 @@ import { PracticeServicesService } from './practice-services.service';
 import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
 import { LoginGaurdService } from './route-gaurd/login-gaurd.service';
 import { DataTablesModule } from 'angular-datatables';
+import { LibraryComponent } from './library/library.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
+import { MaterialUiModule } from './material-ui/material-ui.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +26,8 @@ import { DataTablesModule } from 'angular-datatables';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
+    LibraryComponent,
+    SidemenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,7 @@ import { DataTablesModule } from 'angular-datatables';
     BrowserAnimationsModule,
     FontAwesomeModule,
     DataTablesModule,
+    MaterialUiModule,
     ToastrModule.forRoot({
     }),
   ],

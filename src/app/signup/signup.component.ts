@@ -41,7 +41,10 @@ export class SignupComponent implements OnInit {
       }
     })
   }
-
+  
+  cancelClick(){
+    this.router.navigateByUrl('');
+  }
   getCities() {
     return this.appcomp.citiesList;
   }

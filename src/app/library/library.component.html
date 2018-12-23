@@ -1,0 +1,136 @@
+<div *ngIf="user_role == 'USER'">
+  <div class="containeralign form-group">
+    <p class="alignCenter"> Select your location : </p>
+    <select class="form-control css1" (change)=getLibraries($event)>
+      <option disabled selected [ngValue]="undefined"> Select City</option>
+      <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+    </select>
+  </div>
+  <table datatable *ngIf="librariesList.length">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of librariesList; index as i">
+          <td>{{i+1}}</td>
+          <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+          <td>{{data.address}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
+<div *ngIf="user_role == 'ADMIN'">
+    <div class="containeralign form-group">
+      <p class="alignCenter"> Select your location : </p>
+      <select class="form-control css1" (change)=getLibraries($event)>
+        <option disabled selected [ngValue]="undefined"> Select City</option>
+        <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Create Library</button>
+    </div>
+    <table datatable *ngIf="librariesList.length">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of librariesList; index as i">
+            <td>{{i+1}}</td>
+            <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+            <td>{{data.address}}</td>
+            <td class="outline">
+                  <button  mat-icon-button (click)="onEdit(element)"><mat-icon>edit</mat-icon></button>
+                  <button  mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+<!-- Material UI -->
+
+<!-- <div *ngIf="user_role == 'ADMIN'">
+  <div class="containeralign form-group">
+    <p class="alignCenter"> Select your location : </p>
+    <select class="form-control css1" (change)=getLibraries($event)>
+      <option disabled selected [ngValue]="undefined"> Select City</option>
+      <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Create Library</button>
+  </div>
+
+  <div class="search-div">
+      <button mat-raised-button 
+        (click)="onCreate()">
+        <mat-icon>add</mat-icon>Create
+      </button>
+      <mat-form-field class="search-form-field" floatLabel="never">
+        <input matInput 
+        placeholder="Search" 
+        autocomplete="off" 
+        [(ngModel)]="searchKey" 
+          (keyup)="applyFilter()">
+        <button mat-button 
+          matSuffix 
+          mat-icon-button 
+          *ngIf="searchKey" 
+          aria-label="Clear"
+          (click)="onSearchClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  <mat-table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell class="outline" *matCellDef="let element">
+          <button  mat-icon-button (click)="onEdit(element)"><mat-icon>edit</mat-icon></button>
+          <button  mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading Data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+        <mat-footer-cell class = "noData" *matFooterCellDef colspan="6">
+         No Data Found
+        </mat-footer-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null && dataSource.data.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator 
+      [pageSizeOptions]="[10, 20, 30]" 
+      [pageSize]="10" 
+      showFirstLastButtons>
+    </mat-paginator>
+</div> -->

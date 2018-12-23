@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { LoginComponent } from './../login/login.component';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
@@ -11,10 +10,10 @@ import { AppComponent } from '../app.component';
 })
 export class DashboardComponent implements OnInit {
   librariesList: any = [];
-  user_role:string;
-  constructor(private appcomp:AppComponent,private myservice: PracticeServicesService, private loginComp: LoginComponent, private router: Router) { }
+  
+  constructor(private appcomp:AppComponent,private myservice: PracticeServicesService, private router: Router) { }
   ngOnInit() {
-  this.user_role = localStorage.getItem("Role");
+  
   }
   getLibraries(event) {
     this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
@@ -25,7 +24,7 @@ export class DashboardComponent implements OnInit {
   getAllLibraryBooks(libraryId) {
       this.router.navigateByUrl("books?libId="+libraryId)
     }
-  
+ 
   getCities() {
     return this.appcomp.citiesList;
   }

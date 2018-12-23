@@ -10,11 +10,13 @@ import { FormGroup, FormControl, Validators, FormBuilder }
 })
 export class AppComponent implements OnInit{
   title = 'Library App'; 
+  user_role:string;
   constructor(public myservice: PracticeServicesService, private toastr:ToastrService) {}
   form: FormGroup;
   public citiesList :any = [];
   public errorMessage;
   ngOnInit() {
+  this.user_role = localStorage.getItem("Role");
    this.getCities();
    setTimeout(() => {
     

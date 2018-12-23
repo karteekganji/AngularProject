@@ -1,0 +1,41 @@
+.alignCenter{
+    margin: 0%;
+}
+.css1{
+    width: 9%;
+    margin: 2% 1%;
+}
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.containeralign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.linkcss {
+color: blue;
+}
+.linkcss:hover{
+    text-decoration: underline;
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #ff9900 !important;
+    border-color: #ff9900 !important;
+}
+
+table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .noData{
+      color: red;
+      font-weight: bold;
+  }
