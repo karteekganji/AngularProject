@@ -70,6 +70,10 @@
   .alertValalidation{
   color:red;
   }
+  .required { 
+    content:"*";
+    color: red;
+  }
 .hide{
   display: none
 }

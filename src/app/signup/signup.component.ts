@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
         '', [Validators.required]
       ),
       cityName: new FormControl('', [Validators.required]),
-      gender: new FormControl('', [Validators.required]),
+      gender: new FormControl('MALE', [Validators.required],),
       role:new FormControl('USER')
     });
   }
