@@ -18,6 +18,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { LibraryComponent } from './library/library.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MaterialUiModule } from './material-ui/material-ui.module';
+import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { MaterialUiModule } from './material-ui/material-ui.module';
     FontAwesomeModule,
     DataTablesModule,
     MaterialUiModule,
+    NgbDatepickerModule,
+    NgbModule.forRoot(),
     ToastrModule.forRoot({
     }),
   ],

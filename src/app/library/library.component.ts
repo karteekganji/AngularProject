@@ -4,16 +4,18 @@ import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { SignupComponent } from '../signup/signup.component';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-library',
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
 })
+
 export class LibraryComponent implements OnInit {
   librariesList: any = [];
   user_role: string;
-
+  closeResult: string;
   //##### Material UI Code
   // dataSource: MatTableDataSource<any>;
   // @ViewChild(MatSort) sort: MatSort;
@@ -21,7 +23,7 @@ export class LibraryComponent implements OnInit {
   // searchKey: string;
   // columnsToDisplay: string[] = ['position', 'name', 'address','actions'];
   constructor(private appcomp: AppComponent, private myservice: PracticeServicesService, 
-    private router: Router ,private dialog: MatDialog) { }
+    private router: Router ,private modalService: NgbModal) { }
   ngOnInit() {
     this.user_role = this.appcomp.user_role;
   }
@@ -35,6 +37,25 @@ export class LibraryComponent implements OnInit {
       // this.dataSource.paginator = this.paginator;
     })
   }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
 
   getAllLibraryBooks(libraryId) {
     this.router.navigateByUrl("books?libId=" + libraryId)

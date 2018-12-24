@@ -4,7 +4,6 @@
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
             <form [formGroup]="formdata" (ngSubmit)="signUp(formdata.value)">
-                {{formdata.value | json}}
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" required placeholder="Name" formControlName="name">
                     <div class="alertValalidation" *ngIf="formdata.get('name').touched && formdata.get('name').hasError('required')">
