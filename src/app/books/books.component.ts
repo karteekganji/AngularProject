@@ -39,7 +39,7 @@ export class BooksComponent implements OnInit {
     })
   }
   goBack(){
-    this.router.navigateByUrl("dashboard");
+    this.router.navigateByUrl("library");
   }
   displayAddedBooks(event){
 

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { FormGroup, FormControl, Validators, FormBuilder }
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public myservice: PracticeServicesService, private router: Router, private toastr:ToastrService) { }
+  constructor(public myservice: PracticeServicesService, private router: Router,
+    private toastr: ToastrService, private appcomp: AppComponent) { }
   librariesList: any = [];
   formdata;
   ngOnInit() {
@@ -26,6 +28,12 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  getUserRole() {
+    return this.appcomp.getUserRole();
+  }
+  getAuthtoken(){
+    return this.appcomp.getAuthtoken();
+  }
   login(data) {
     this.myservice.postService(PracticeServicesService.practiceApiList.login, data).subscribe(response => {
       if (response.status == "SUCCESS") {
@@ -33,7 +41,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("Role", response.payLoad.userDetails.role)
         this.librariesList = response.payLoad.libraries;
         this.toastr.success("Login Successfull")
-        this.router.navigateByUrl('dashboard');
+        this.router.navigateByUrl('library');
       } else {
         this.toastr.error(response.errorMessage)
       }

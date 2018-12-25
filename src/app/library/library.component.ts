@@ -4,7 +4,7 @@ import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { SignupComponent } from '../signup/signup.component';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-library',
@@ -14,7 +14,6 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 export class LibraryComponent implements OnInit {
   librariesList: any = [];
-  user_role: string;
   closeResult: string;
   //##### Material UI Code
   // dataSource: MatTableDataSource<any>;
@@ -22,10 +21,13 @@ export class LibraryComponent implements OnInit {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   // searchKey: string;
   // columnsToDisplay: string[] = ['position', 'name', 'address','actions'];
-  constructor(private appcomp: AppComponent, private myservice: PracticeServicesService, 
-    private router: Router ,private modalService: NgbModal) { }
+  constructor(private appcomp: AppComponent, private myservice: PracticeServicesService,
+    private router: Router, private modalService: NgbModal) { }
   ngOnInit() {
-    this.user_role = this.appcomp.user_role;
+
+  }
+  getUserRole() {
+    return this.appcomp.getUserRole();
   }
   getLibraries(event) {
     this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
@@ -39,7 +41,7 @@ export class LibraryComponent implements OnInit {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -52,10 +54,9 @@ export class LibraryComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
-
 
   getAllLibraryBooks(libraryId) {
     this.router.navigateByUrl("books?libId=" + libraryId)

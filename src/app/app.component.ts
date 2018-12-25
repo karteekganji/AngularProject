@@ -1,38 +1,38 @@
 import { PracticeServicesService } from './practice-services.service';
-import { Component, OnInit,HostListener } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } 
-    from '@angular/forms';
-  import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder }
+  from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html', 
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
-  title = 'Library App'; 
-  user_role:string;
-  constructor(public myservice: PracticeServicesService, private toastr:ToastrService) {}
+export class AppComponent implements OnInit {
+  title = 'Library App';
+  constructor(public myservice: PracticeServicesService, private toastr: ToastrService) { }
   form: FormGroup;
-  public citiesList :any = [];
-  public errorMessage;
+  public citiesList: any = [];
   ngOnInit() {
-  this.user_role = localStorage.getItem("Role");
-   this.getCities();
-   setTimeout(() => {
-    
-  }, 500);
-  
+    this.getCities();
+    setTimeout(() => {
+
+    }, 500);
+
   }
-  greet():void { 
-    console.log("Hello World!!!") 
- }
- getCities(){
-  return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
-    this.citiesList = respose.payLoad;
-    error => {
-      this.toastr.error(error)
-    }
-  });
-}
+  getUserRole() {
+    return localStorage.getItem("Role");
+  }
+  getAuthtoken(){
+    return localStorage.getItem("Auth-Token")
+  }
+  getCities() {
+    return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
+      this.citiesList = respose.payLoad;
+      error => {
+        this.toastr.error(error)
+      }
+    });
+  }
 
 }

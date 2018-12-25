@@ -1,4 +1,4 @@
-<div *ngIf="user_role == 'USER'">
+<div *ngIf="getUserRole() == 'USER'">
   <div class="containeralign form-group">
     <p class="alignCenter"> Select your location : </p>
     <select class="form-control css1" (change)=getLibraries($event)>
@@ -17,7 +17,7 @@
     <tbody>
       <tr *ngFor="let data of librariesList; index as i">
         <td>{{i+1}}</td>
-        <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+        <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name | titlecase}}</i></td>
         <td>{{data.address}}</td>
       </tr>
     </tbody>
@@ -25,7 +25,7 @@
 </div>
 
 
-<div *ngIf="user_role == 'ADMIN'">
+<div *ngIf="getUserRole() == 'ADMIN'">
   <div class="containeralign form-group">
     <p class="alignCenter"> Select your location : </p>
     <select class="form-control css1" (change)=getLibraries($event)>
@@ -46,7 +46,7 @@
     <tbody>
       <tr *ngFor="let data of librariesList; index as i">
         <td>{{i+1}}</td>
-        <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name}}</i></td>
+        <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name | titlecase}}</i></td>
         <td>{{data.address}}</td>
         <td class="outline">
           <button mat-icon-button (click)="onEdit(element)">

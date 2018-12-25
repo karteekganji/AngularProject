@@ -13,13 +13,13 @@ export class HeaderComponent implements OnInit {
   
   constructor(public myservice: PracticeServicesService, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
   auth: any;
-  user_role : string;
   ngOnInit() {
-    this.user_role = this.appcomp.user_role; 
-    this.auth = localStorage.getItem("Auth-Token");
   }
-  authtoken():string{
-    return localStorage.getItem("Auth-Token")
+  authtoken(){
+    return this.appcomp.getAuthtoken();
+  }
+  getUserRole(){
+  return this.appcomp.getUserRole(); 
   }
   imgClick(){
     this.router.navigateByUrl('')
@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit {
       }
     })
   }
-
   clickLibrary(){
     this.router.navigateByUrl("library")
   }

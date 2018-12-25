@@ -37,6 +37,7 @@ nav > .nav.nav-tabs{
     border-radius:0;
 
 }
+
 nav > div a.nav-item.nav-link,
 nav > div a.nav-item.nav-link.active
 {
@@ -53,7 +54,7 @@ nav > div a.nav-item.nav-link.active:after
   bottom: -60px;
   left: -31%;
   border: 15px solid transparent;
-  border-top-color: #17a2b8 ;
+  border-top-color: #17a2b8;
 }
 nav > div a.nav-item.nav-link:hover,
 nav > div a.nav-item.nav-link:focus
@@ -64,4 +65,3 @@ nav > div a.nav-item.nav-link:focus
     border-radius:0;
     transition:background 0.20s linear;
 }
- 

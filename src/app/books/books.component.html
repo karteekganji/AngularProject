@@ -1,5 +1,5 @@
 <div class="back" align=center>
-  <span>Books Available at : {{libraryName}}</span>
+  <span>Books Available at : <b>{{libraryName | titlecase}}</b></span>
   <button class="btn btn-outline-info my-2 my-sm-0" (click)="goBack()">
     <i class="material-icons">
       reply
@@ -20,7 +20,7 @@
   <tbody>
     <tr *ngFor="let data of libraryBooksList; index as i">
       <td>{{i+1}}</td>
-      <td> {{data.title}} </td>
+      <td> {{data.title | titlecase}} </td>
       <td>{{data.languageName}}</td>
       <td>{{data.authorName}}</td>
       <td>{{data.categoryName}}</td>
