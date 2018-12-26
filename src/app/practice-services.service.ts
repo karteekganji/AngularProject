@@ -7,6 +7,7 @@ import {Observable} from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+declare var swal: any;
 @Injectable()
 export class PracticeServicesService {
   httpdata;
@@ -22,6 +23,7 @@ export class PracticeServicesService {
     getAllBooks: "get-all-books",
     login: "login",
     getLibraries: "get-all-library",
+    deleteLibrary: "admin/delete-library/",
     getLibraryBooks: "library-books/",
     signUp: "signup",
     logOut: "logout",
@@ -53,6 +55,19 @@ export class PracticeServicesService {
     };
     console.log(data)
     return this.http.post(this.baseUrl + url, data,httpOptions).pipe(map((response: any) => response));
+  }
+  deleteService(url) {
+    var localStorageVariable = '';
+    if (localStorage.getItem('Auth-Token')) {
+      localStorageVariable = localStorage.getItem('Auth-Token');
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Auth-Token': localStorageVariable
+      })
+    };
+    return this.http.delete(this.baseUrl + url,httpOptions).pipe(map((response: any) => response));
   }
   isLogin() {
     if (localStorage.getItem("Auth-Token")) {

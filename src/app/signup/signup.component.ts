@@ -1,3 +1,4 @@
+import { Constants } from './../constants';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder }
@@ -20,9 +21,9 @@ export class SignupComponent implements OnInit {
   }
   signUpData() {
     this.formdata = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.pattern(Constants.email_regex)]),
       password: new FormControl('', [Validators.required]),
-      mobileNumber: new FormControl('', [Validators.required]),
+      mobileNumber: new FormControl('', [Validators.required,Validators.pattern(Constants.mobile_regex)]),
       name: new FormControl(
         '', [Validators.required]
       ),

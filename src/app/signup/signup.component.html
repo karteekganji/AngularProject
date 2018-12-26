@@ -7,26 +7,32 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" required placeholder="Name" formControlName="name">
                     <div class="alertValalidation" *ngIf="formdata.get('name').touched && formdata.get('name').hasError('required')">
-                        Name is required.
+                        Name is required
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="email" placeholder="Username" formControlName="email">
+                    <input type="text" class="form-control" name="email" placeholder="Email" formControlName="email">
                     <div class="alertValalidation" *ngIf="formdata.get('email').touched && formdata.get('email').hasError('required')">
-                        Username is required.
+                        Email is required
                     </div>
+                    <div class="alertValalidation" *ngIf=" formdata.get('email').hasError('pattern')">
+                        Invalid Email format
+                      </div>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="mobileNumber" placeholder="Mobile number"
                         formControlName="mobileNumber">
                     <div class="alertValalidation" *ngIf="formdata.get('mobileNumber').touched && formdata.get('mobileNumber').hasError('required')">
-                        Mobile number is required.
+                        Mobile number is required
                     </div>
+                    <div class="alertValalidation" *ngIf=" formdata.get('mobileNumber').hasError('pattern')">
+                        Invalid Mobile number format
+                      </div>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" name="password" placeholder="Password" formControlName="password">
                     <div class="alertValalidation" *ngIf="formdata.get('password').touched && formdata.get('password').hasError('required')">
-                        Password is required.
+                        Password is required
                     </div>
                 </div>
                 <div class="form-group">
@@ -36,7 +42,7 @@
                     </select>
                 </div>
                 <div class="alertValalidation" *ngIf="formdata.get('cityName').touched && formdata.get('cityName').hasError('required')">
-                    City is required.
+                    City is required
                 </div>
 
                 <div class="form-group">
