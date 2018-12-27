@@ -52,7 +52,7 @@
           <button mat-icon-button (click)="onEdit(element)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="confirmFileDeletionSwal.show()">
+          <button mat-icon-button color="warn" (click)="onDelete(data.id)">
             <mat-icon>delete_outline</mat-icon>
           </button>
         </td>
@@ -70,20 +70,9 @@
     </button>
   </div>
   <div class="modal-body">
-    <form class="form-inline">
-      <div class="form-group">
-        <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
-            <button (click)="d.toggle()" type="button"> <i class="material-icons">
-                date_range
-              </i></button>
-          </div>
-        </div>
-      </div>
+    <form (ngSubmit)="onSave()">
+
     </form>
-    <hr />
-    <pre>Model: {{ model | json }}</pre>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>

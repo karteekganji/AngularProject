@@ -1,13 +1,26 @@
+import { DataTablesModule } from 'angular-datatables';
+import { AppComponent } from './../app.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PracticeServicesService } from '../practice-services.service';
-import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
 import { SignupComponent } from '../signup/signup.component';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Constants } from '../constants';
+import swal from 'sweetalert2/dist/sweetalert2.js'
+import { DataSource } from '@angular/cdk/table';
+declare var swal: any;
+
+class Library {
+  constructor(
+    public name: string = '',
+    public address: string = '',
+    public isActive: boolean = true,
+    public cityId: number,
+  ) { }
+}
 
 @Component({
   selector: 'app-library',
@@ -26,22 +39,20 @@ export class LibraryComponent implements OnInit {
   // searchKey: string;
   // columnsToDisplay: string[] = ['position', 'name', 'address','actions'];
   constructor(private appcomp: AppComponent, private myservice: PracticeServicesService,
-    private router: Router, private modalService: NgbModal, private toastr:ToastrService) { }
-  ngOnInit() {
+    private router: Router, private modalService: NgbModal, private toastr: ToastrService) { }
 
+  ngOnInit() {
+    this.getCities();
   }
 
-  signUpData() {
+  libraryData() {
     this.formdata = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.pattern(Constants.email_regex)]),
-      password: new FormControl('', [Validators.required]),
-      mobileNumber: new FormControl('', [Validators.required,Validators.pattern(Constants.mobile_regex)]),
-      name: new FormControl(
-        '', [Validators.required]
+      name: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      isActive: new FormControl(
+        true, [Validators.required]
       ),
-      cityName: new FormControl('', [Validators.required]),
-      gender: new FormControl('MALE', [Validators.required],),
-      role:new FormControl('USER')
+      cityId: new FormControl('', [Validators.required]),
     });
   }
   getUserRole() {
@@ -57,16 +68,33 @@ export class LibraryComponent implements OnInit {
       // this.dataSource.paginator = this.paginator;
     })
   }
-  onDelete(data){
-    this.myservice.deleteService(PracticeServicesService.practiceApiList.deleteLibrary+data).subscribe(response =>{
-      if (response.status == "SUCCESS") {
-        const item = this.librariesList.find(item => item.id === data);
-        this.librariesList.splice(this.librariesList.indexOf(item));
-        this.toastr.success("Library deleted succesfully")
-      }else{
-        this.toastr.error(response.errorMessage)
+  onDelete(data) {
+    this.myservice.showDeleteAlert().then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted!',
+          'Library has been deleted.',
+          'success'
+        )
+        this.myservice.deleteService(PracticeServicesService.practiceApiList.deleteLibrary + data).subscribe(response => {
+          if (response.status == "SUCCESS") {
+            const item = this.librariesList.find(item => item.id === data);
+            this.librariesList.splice(this.librariesList.indexOf(item));
+            this.toastr.success("Library deleted succesfully")
+          } else {
+            this.toastr.error(response.errorMessage)
+          }
+        }
+        )
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        swal(
+          'Canceled!',
+          'Your action has been cancelled',
+          'error'
+        )
       }
-    })
+    }
+    )
   }
   open(content) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -93,4 +121,5 @@ export class LibraryComponent implements OnInit {
   getCities() {
     return this.appcomp.citiesList;
   }
+
 }

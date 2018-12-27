@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeGaurdService } from './route-gaurd/home-gaurd.service';
 import {LoginGaurdService} from './route-gaurd/login-gaurd.service';
 import { LibraryComponent } from './library/library.component';
+import { SampleComponent } from './sample/sample.component';
 
 
 const appRoutes: Routes = [
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   {path : 'books',component : BooksComponent,canActivate: [LoginGaurdService]},
   {path : 'signup',component : SignupComponent,canActivate: [HomeGaurdService]},
   {path : 'library',component : LibraryComponent,canActivate: [LoginGaurdService]},
+  {path : 'sample',component : SampleComponent},
   {path : '**',component : PageNotFoundComponent},
 ];
 

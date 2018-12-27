@@ -3,17 +3,17 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient, HttpErrorResponse, HttpHeaders
 } from '@angular/common/http';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import swal from 'sweetalert2/dist/sweetalert2.js'
 declare var swal: any;
 @Injectable()
 export class PracticeServicesService {
   httpdata;
   baseUrl = Constants.Base_URL;
   constructor(private http: HttpClient, private toastr: ToastrService) {
-
   }
   ngOnInit() {
 
@@ -54,7 +54,7 @@ export class PracticeServicesService {
       })
     };
     console.log(data)
-    return this.http.post(this.baseUrl + url, data,httpOptions).pipe(map((response: any) => response));
+    return this.http.post(this.baseUrl + url, data, httpOptions).pipe(map((response: any) => response));
   }
   deleteService(url) {
     var localStorageVariable = '';
@@ -67,7 +67,19 @@ export class PracticeServicesService {
         'Auth-Token': localStorageVariable
       })
     };
-    return this.http.delete(this.baseUrl + url,httpOptions).pipe(map((response: any) => response));
+    return this.http.delete(this.baseUrl + url, httpOptions).pipe(map((response: any) => response));
+  }
+  showDeleteAlert(): any {
+    return swal({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    })
   }
   isLogin() {
     if (localStorage.getItem("Auth-Token")) {
