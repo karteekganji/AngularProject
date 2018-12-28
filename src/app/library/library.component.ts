@@ -11,15 +11,32 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Constants } from '../constants';
 import swal from 'sweetalert2/dist/sweetalert2.js'
 import { DataSource } from '@angular/cdk/table';
+import { library } from '@fortawesome/fontawesome-svg-core';
 declare var swal: any;
 
 class Library {
-  constructor(
-    public name: string = '',
-    public address: string = '',
-    public isActive: boolean = true,
-    public cityId: number,
-  ) { }
+  public name: string = '';
+  public address: string = '';
+  public isActive: boolean = true;
+  public cityId: number;
+  public id:number;
+  constructor(values?: any) {
+    Object.assign(this, values);
+  }
+  setData(payload?: any) {
+    if (payload) {
+      this.name = payload.name;
+      this.address = payload.address;
+      this.isActive = payload.isActive;
+      this.cityId = payload.city.id;
+      this.id = payload.id;
+    } else {
+      this.name = '';
+      this.address = '';
+      this.isActive = true;
+      this.cityId = null;
+    }
+  }
 }
 
 @Component({
@@ -32,6 +49,8 @@ export class LibraryComponent implements OnInit {
   librariesList: any = [];
   closeResult: string;
   formdata;
+  library = new Library();
+  buttonText = "Create";
   //##### Material UI Code
   // dataSource: MatTableDataSource<any>;
   // @ViewChild(MatSort) sort: MatSort;
@@ -45,16 +64,6 @@ export class LibraryComponent implements OnInit {
     this.getCities();
   }
 
-  libraryData() {
-    this.formdata = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      isActive: new FormControl(
-        true, [Validators.required]
-      ),
-      cityId: new FormControl('', [Validators.required]),
-    });
-  }
   getUserRole() {
     return this.appcomp.getUserRole();
   }
@@ -97,6 +106,12 @@ export class LibraryComponent implements OnInit {
     )
   }
   open(content) {
+    if (this.buttonText == 'Update') {
+      this.buttonText = 'Create';
+    }
+    if (this.buttonText == 'Create') {
+      this.library = new Library();
+    }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -121,5 +136,32 @@ export class LibraryComponent implements OnInit {
   getCities() {
     return this.appcomp.citiesList;
   }
+
+  saveLibrary(modal?:any){
+    this.buttonText = "Create";
+    this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
+      if (response.status == 'SUCCESS') {
+        this.toastr.success("Library added succesfully")
+        if(modal)
+        modal.close();
+      } else {
+        this.toastr.error(response.errorMessage)
+      }
+    })
+  }
+  updateLibrary(libraryId,modal?:any){
+    this.buttonText = "Update";
+    this.myservice.getService(PracticeServicesService.practiceApiList.getLibrary+libraryId).subscribe(response =>{
+      if (response.status == 'SUCCESS') {
+       this.library.setData(response.payLoad);
+        if(modal)
+        modal.close();
+      } else {
+        this.toastr.error(response.errorMessage)
+      }
+    })
+  }
+
+
 
 }

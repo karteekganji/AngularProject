@@ -19,7 +19,6 @@ import { LibraryComponent } from './library/library.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { MaterialUiModule } from './material-ui/material-ui.module';
 import { NgbModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
-import { SampleComponent } from './sample/sample.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,6 @@ import { SampleComponent } from './sample/sample.component';
     PageNotFoundComponent,
     LibraryComponent,
     SidemenuComponent,
-    SampleComponent,
   ],
   imports: [
     BrowserModule,

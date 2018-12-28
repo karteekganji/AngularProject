@@ -49,7 +49,7 @@
         <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name | titlecase}}</i></td>
         <td>{{data.address}}</td>
         <td class="outline">
-          <button mat-icon-button (click)="onEdit(element)">
+          <button mat-icon-button (click)="open(content);updateLibrary(data.id,modal)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="onDelete(data.id)">
@@ -64,19 +64,52 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Create Library</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Library</h4>
+    <button type="button" class="close outline" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="onSave()">
-
+    <form>
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" class="form-control" name="name" #name="ngModel" required placeholder="Library Name" [(ngModel)]="library.name">
+        </div>
+        <div *ngIf="(name.touched && name.invalid)">
+            <span class="alertValalidation">*Name Required</span>
+          </div>
+        <div class="input-group">
+          <select class="form-control" name="cityId" #cityId="ngModel" required [(ngModel)]="library.cityId">
+            <option disabled selected [ngValue]="undefined"> Select City</option>
+            <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
+          </select>
+        </div>
+        <div *ngIf="(cityId.touched && cityId.invalid)">
+          <span class="alertValalidation">*City Required</span>
+        </div>
+        <div class="input-group">
+          <input type="text" class="form-control" #address="ngModel" name="address" required [(ngModel)]="library.address" required placeholder="Library Address">
+        </div>
+        <div *ngIf="(address.touched && address.invalid)">
+          <span class="alertValalidation">*Address Required</span>
+        </div>
+        <div class="input-group radio-css">
+            <label>Status : &nbsp; </label>
+          <label class="radio-inline">
+            <input type="radio" name="isActive" [value]="true" required [(ngModel)]="library.isActive">Active &nbsp;
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="isActive" [value]="false"  required [(ngModel)]="library.isActive">InActive &nbsp;
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-dark" (click) = "saveLibrary(modal)">{{buttonText}}</button>
+        </div>
+        
     </form>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-  </div>
+  
 </ng-template>
 
 <!-- Material UI -->

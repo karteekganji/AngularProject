@@ -24,6 +24,8 @@ export class PracticeServicesService {
     login: "login",
     getLibraries: "get-all-library",
     deleteLibrary: "admin/delete-library/",
+    getLibrary:"get-library/",
+    addLibrary:"admin/add-library",
     getLibraryBooks: "library-books/",
     signUp: "signup",
     logOut: "logout",

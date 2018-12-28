@@ -39,3 +39,16 @@ table {
       color: red;
       font-weight: bold;
   }
+
+  .input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 8px;
+}
+.radio-css{
+    margin: 6px 25%;
+}
+button:focus {
+    outline: 0px auto -webkit-focus-ring-color !important;
+}
