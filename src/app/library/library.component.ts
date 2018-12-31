@@ -68,14 +68,28 @@ export class LibraryComponent implements OnInit {
     return this.appcomp.getUserRole();
   }
   getLibraries(event) {
-    this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
-      this.librariesList = response.payLoad;
+    // console.log("event is ",event.target.value);
+    if(event.target)
+    {      
+      if(event.target.value)
+    {
 
-      //##### Material UI Code
-      // this.dataSource = new MatTableDataSource(this.librariesList)
-      // this.dataSource.sort = this.sort;
-      // this.dataSource.paginator = this.paginator;
-    })
+      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
+        this.librariesList = response.payLoad;
+  
+        //##### Material UI Code
+        // this.dataSource = new MatTableDataSource(this.librariesList)
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
+      })
+    }
+    }
+    else
+    {
+      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event).subscribe(response => {
+        this.librariesList = response.payLoad;
+      })
+    }
   }
   onDelete(data) {
     this.myservice.showDeleteAlert().then((result) => {
@@ -139,15 +153,20 @@ export class LibraryComponent implements OnInit {
 
   saveLibrary(modal?:any){
     this.buttonText = "Create";
-    this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
-      if (response.status == 'SUCCESS') {
-        this.toastr.success("Library added succesfully")
-        if(modal)
-        modal.close();
-      } else {
-        this.toastr.error(response.errorMessage)
-      }
-    })
+      this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
+        if (response.status == 'SUCCESS') {
+          this.librariesList = this.getLibraries(response.payLoad.city.cityName);
+          if (!this.library.id) {
+            this.toastr.success("Library Added succesfully")
+          }else if(this.library.id){
+            this.toastr.success("Library Updated succesfully")
+          }
+          if(modal)
+          modal.close();
+        } else {
+          this.toastr.error(response.errorMessage)
+        }
+      })
   }
   updateLibrary(libraryId,modal?:any){
     this.buttonText = "Update";
@@ -161,7 +180,4 @@ export class LibraryComponent implements OnInit {
       }
     })
   }
-
-
-
 }
