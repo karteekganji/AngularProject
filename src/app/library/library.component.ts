@@ -74,7 +74,7 @@ export class LibraryComponent implements OnInit {
       if(event.target.value)
     {
 
-      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {
+      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
         this.librariesList = response.payLoad;
   
         //##### Material UI Code
@@ -155,7 +155,7 @@ export class LibraryComponent implements OnInit {
     this.buttonText = "Create";
       this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
         if (response.status == 'SUCCESS') {
-          this.librariesList = this.getLibraries(response.payLoad.city.cityName);
+            this.librariesList = this.getLibraries(response.payLoad.city.cityName);
           if (!this.library.id) {
             this.toastr.success("Library Added succesfully")
           }else if(this.library.id){
