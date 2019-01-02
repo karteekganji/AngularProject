@@ -68,12 +68,12 @@ export class LibraryComponent implements OnInit {
     return this.appcomp.getUserRole();
   }
   getLibraries(event) {
+    console.log("Target event -------",event);
     // console.log("event is ",event.target.value);
     if(event.target)
     {      
       if(event.target.value)
     {
-
       this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
         this.librariesList = response.payLoad;
   
@@ -86,7 +86,7 @@ export class LibraryComponent implements OnInit {
     }
     else
     {
-      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event).subscribe(response => {
+      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event).subscribe(response => {
         this.librariesList = response.payLoad;
       })
     }
@@ -155,7 +155,7 @@ export class LibraryComponent implements OnInit {
     this.buttonText = "Create";
       this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
         if (response.status == 'SUCCESS') {
-            this.librariesList = this.getLibraries(response.payLoad.city.cityName);
+            this.librariesList = this.getLibraries(response.payLoad.city.id);
           if (!this.library.id) {
             this.toastr.success("Library Added succesfully")
           }else if(this.library.id){

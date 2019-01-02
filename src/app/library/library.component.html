@@ -3,7 +3,7 @@
     <p class="alignCenter"> Select your location : </p>
     <select class="form-control css1" (change)=getLibraries($event)>
       <option disabled selected [ngValue]="undefined"> Select City</option>
-      <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
+      <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
     </select>
   </div>
   <table datatable *ngIf="librariesList.length">

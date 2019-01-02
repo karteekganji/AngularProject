@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Library App';
   constructor(public myservice: PracticeServicesService, private toastr: ToastrService) { }
   form: FormGroup;
-  public citiesList: any = [];
+  citiesList = [];
   ngOnInit() {
     this.getCities();
     setTimeout(() => {
@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
   getCities() {
     return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
       this.citiesList = respose.payLoad;
+      console.log(this.citiesList);
+      
       error => {
         this.toastr.error(error)
       }
