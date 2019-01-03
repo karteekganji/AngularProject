@@ -2,6 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Toast, ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-books',
@@ -14,16 +15,16 @@ export class BooksComponent implements OnInit {
   libraryName: string;
   libraryBooksList: any = [];
   formData;
-  constructor(private router: Router, private actRoter: ActivatedRoute, private myService: PracticeServicesService) {
-   
+  showBooks: boolean = true;
+  booksList: any = [];
+  constructor(private router: Router, private actRoter: ActivatedRoute,
+    private myService: PracticeServicesService, private toastr: ToastrService) {
+
   }
   ngOnInit() {
-    
     this.actRoter.queryParams.subscribe(params => {
       this.libId = params['libId'];
     });
-    this.data();
-    this.getAllLibraryBooks();
   }
 
   data() {
@@ -33,15 +34,30 @@ export class BooksComponent implements OnInit {
     });
   }
   getAllLibraryBooks() {
-    this.myService.getService(PracticeServicesService.practiceApiList.getLibraryBooks + this.libId).subscribe(responce => {
-      this.libraryBooksList = responce.payLoad.bookDetails;
-      this.libraryName = responce.payLoad.libraryDetails;
+    this.showBooks=false;
+    this.myService.getService(PracticeServicesService.practiceApiList.getLibraryBooks + this.libId).subscribe(response => {
+      if (response.status == 'SUCCESS') {
+        this.libraryBooksList = response.payLoad.bookDetails;
+        this.libraryName = response.payLoad.libraryDetails;
+      } else {
+        this.toastr.error(response.errorMessage)
+      }
     })
   }
-  goBack(){
+  getAllBooks() {
+    this.myService.getService(PracticeServicesService.practiceApiList.getAllBooks).subscribe(response => {
+      if (response.status == 'SUCCESS') {
+        this.booksList = response.payLoad;
+      }
+      else {
+        this.toastr.error(response.errorMessage)
+      }
+    })
+  }
+  goBack() {
     this.router.navigateByUrl("library");
   }
-  displayAddedBooks(event){
+  displayAddedBooks(event) {
 
   }
 }

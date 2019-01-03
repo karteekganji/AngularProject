@@ -1,10 +1,9 @@
-<div class="back" align=center>
+<div *ngIf = "!showBooks" class="back" align=center>
   <span>Books Available at : <b>{{libraryName | titlecase}}</b></span>
   <button class="btn btn-outline-info my-2 my-sm-0" (click)="goBack()">
     <i class="material-icons">
       reply
     </i>Back</button>
-</div>
 <table datatable *ngIf="libraryBooksList.length; else message">
   <thead>
     <tr>
@@ -33,3 +32,37 @@
 <ng-template #message>
   <h3 class="clrRed">No Books available in this Library!</h3>
 </ng-template>
+</div>
+
+<div *ngIf = "showBooks; else messageall" align=center>
+  <span><b>Available Books</b></span>
+
+<table datatable *ngIf="booksList.length">
+  <thead>
+    <tr>
+      <th>S.No</th>
+      <th>Name</th>
+      <th>Language</th>
+      <th>Author</th>
+      <th>Category</th>
+      <th>Publisher</th>
+      <th>Copies Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of booksList; index as i">
+      <td>{{i+1}}</td>
+      <td> {{data.title | titlecase}} </td>
+      <td>{{data.languageName}}</td>
+      <td>{{data.authorName}}</td>
+      <td>{{data.categoryName}}</td>
+      <td>{{data.publisherName}}</td>
+      <td> {{data.copies}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #messageall>
+  <h3 class="clrRed">No Books available!</h3>
+</ng-template>
+</div>

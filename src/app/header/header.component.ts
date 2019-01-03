@@ -38,4 +38,7 @@ export class HeaderComponent implements OnInit {
   clickLibrary(){
     this.router.navigateByUrl("library")
   }
+  clickBooks(){
+    this.router.navigateByUrl("books")
+  }
 }
