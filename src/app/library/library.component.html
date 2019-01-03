@@ -32,7 +32,7 @@
       <option disabled selected [ngValue]="undefined"> Select City</option>
       <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
     </select>
-    <button type="submit" class="btn btn-primary" (click)="open(content)">Create Library</button>
+    <button type="submit" class="btn btn-primary" (click)="open(content,'Create')">Create Library</button>
   </div>
   <table datatable *ngIf="librariesList.length">
     <thead>
@@ -40,6 +40,7 @@
         <th>S.No</th>
         <th>Name</th>
         <th>Address</th>
+        <th>Active</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -48,8 +49,9 @@
         <td>{{i+1}}</td>
         <td><i class="linkcss" (click)="getAllLibraryBooks(data.id)">{{data.name | titlecase}}</i></td>
         <td>{{data.address}}</td>
+        <td>{{data.isActive}}</td>
         <td class="outline">
-          <button mat-icon-button (click)="open(content);updateLibrary(data.id,modal)">
+          <button mat-icon-button (click)="open(content,'Update');updateLibrary(data.id,modal)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="onDelete(data.id)">

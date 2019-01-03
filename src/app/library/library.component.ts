@@ -23,20 +23,20 @@ class Library {
   constructor(values?: any) {
     Object.assign(this, values);
   }
-  setData(payload?: any) {
-    if (payload) {
-      this.name = payload.name;
-      this.address = payload.address;
-      this.isActive = payload.isActive;
-      this.cityId = payload.city.id;
-      this.id = payload.id;
-    } else {
-      this.name = '';
-      this.address = '';
-      this.isActive = true;
-      this.cityId = null;
-    }
-  }
+  // setData(payload?: any) {
+  //   if (payload) {
+  //     this.name = payload.name;
+  //     this.address = payload.address;
+  //     this.isActive = payload.isActive;
+  //     this.cityId = payload.city.id;
+  //     this.id = payload.id;
+  //   } else {
+  //     this.name = '';
+  //     this.address = '';
+  //     this.isActive = true;
+  //     this.cityId = null;
+  //   }
+  // }
 }
 
 @Component({
@@ -50,7 +50,7 @@ export class LibraryComponent implements OnInit {
   closeResult: string;
   formdata;
   library = new Library();
-  buttonText = "Create";
+  buttonText = "";
   //##### Material UI Code
   // dataSource: MatTableDataSource<any>;
   // @ViewChild(MatSort) sort: MatSort;
@@ -68,8 +68,6 @@ export class LibraryComponent implements OnInit {
     return this.appcomp.getUserRole();
   }
   getLibraries(event) {
-    console.log("Target event -------",event);
-    // console.log("event is ",event.target.value);
     if(event.target)
     {      
       if(event.target.value)
@@ -119,10 +117,8 @@ export class LibraryComponent implements OnInit {
     }
     )
   }
-  open(content) {
-    if (this.buttonText == 'Update') {
-      this.buttonText = 'Create';
-    }
+  open(content,text) {
+    this.buttonText = text;
     if (this.buttonText == 'Create') {
       this.library = new Library();
     }
@@ -132,7 +128,6 @@ export class LibraryComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -152,13 +147,12 @@ export class LibraryComponent implements OnInit {
   }
 
   saveLibrary(modal?:any){
-    this.buttonText = "Create";
       this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
         if (response.status == 'SUCCESS') {
-            this.librariesList = this.getLibraries(response.payLoad.city.id);
-          if (!this.library.id) {
+            this.getLibraries(response.payLoad.city.id);
+          if (this.buttonText =='Create') {
             this.toastr.success("Library Added succesfully")
-          }else if(this.library.id){
+          }else if(this.buttonText =='Update'){
             this.toastr.success("Library Updated succesfully")
           }
           if(modal)
@@ -169,10 +163,11 @@ export class LibraryComponent implements OnInit {
       })
   }
   updateLibrary(libraryId,modal?:any){
-    this.buttonText = "Update";
     this.myservice.getService(PracticeServicesService.practiceApiList.getLibrary+libraryId).subscribe(response =>{
       if (response.status == 'SUCCESS') {
-       this.library.setData(response.payLoad);
+      //  this.library.setData(response.payLoad);
+      this.library = response.payLoad;
+      this.library.cityId = response.payLoad.city.id;
         if(modal)
         modal.close();
       } else {
