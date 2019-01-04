@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
-  constructor(public myservice: PracticeServicesService, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
+  booksList:any = [];
+  constructor(public myService: PracticeServicesService, private router: Router, private toastr: ToastrService,public appcomp:AppComponent) { }
   auth: any;
   ngOnInit() {
   }
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('')
   }
   logOut(data) {
-    this.myservice.postService(PracticeServicesService.practiceApiList.logOut, data).subscribe(response => {
+    this.myService.postService(PracticeServicesService.practiceApiList.logOut, data).subscribe(response => {
       if (response.status == "SUCCESS") {
         this.toastr.success(response.errorMessage)
         localStorage.clear()
@@ -41,4 +41,5 @@ export class HeaderComponent implements OnInit {
   clickBooks(){
     this.router.navigateByUrl("books")
   }
+
 }

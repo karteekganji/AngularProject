@@ -1,17 +1,10 @@
-import { DataTablesModule } from 'angular-datatables';
 import { AppComponent } from './../app.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PracticeServicesService } from '../practice-services.service';
 import { Router } from '@angular/router';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialogConfig, MatDialog } from '@angular/material';
-import { SignupComponent } from '../signup/signup.component';
 import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Constants } from '../constants';
 import swal from 'sweetalert2/dist/sweetalert2.js'
-import { DataSource } from '@angular/cdk/table';
-import { library } from '@fortawesome/fontawesome-svg-core';
 declare var swal: any;
 
 class Library {
@@ -51,13 +44,14 @@ export class LibraryComponent implements OnInit {
   formdata;
   library = new Library();
   buttonText = "";
+  cityId;
   //##### Material UI Code
   // dataSource: MatTableDataSource<any>;
   // @ViewChild(MatSort) sort: MatSort;
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   // searchKey: string;
   // columnsToDisplay: string[] = ['position', 'name', 'address','actions'];
-  constructor(private appcomp: AppComponent, private myservice: PracticeServicesService,
+  constructor(private appcomp: AppComponent, private myService: PracticeServicesService,
     private router: Router, private modalService: NgbModal, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -72,7 +66,8 @@ export class LibraryComponent implements OnInit {
     {      
       if(event.target.value)
     {
-      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
+      this.cityId = event.target.value;
+      this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
         this.librariesList = response.payLoad;
   
         //##### Material UI Code
@@ -84,20 +79,20 @@ export class LibraryComponent implements OnInit {
     }
     else
     {
-      this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event).subscribe(response => {
+      this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event).subscribe(response => {
         this.librariesList = response.payLoad;
       })
     }
   }
   onDelete(data) {
-    this.myservice.showDeleteAlert().then((result) => {
+    this.myService.showDeleteAlert().then((result) => {
       if (result.value) {
         swal(
           'Deleted!',
           'Library has been deleted.',
           'success'
         )
-        this.myservice.deleteService(PracticeServicesService.practiceApiList.deleteLibrary + data).subscribe(response => {
+        this.myService.deleteService(PracticeServicesService.practiceApiList.deleteLibrary + data).subscribe(response => {
           if (response.status == "SUCCESS") {
             const item = this.librariesList.find(item => item.id === data);
             this.librariesList.splice(this.librariesList.indexOf(item));
@@ -139,7 +134,7 @@ export class LibraryComponent implements OnInit {
   }
 
   getAllLibraryBooks(libraryId) {
-    this.router.navigateByUrl("books?libId=" + libraryId)
+    this.router.navigateByUrl("library/librarybooks?libId=" + libraryId)
   }
 
   getCities() {
@@ -147,7 +142,7 @@ export class LibraryComponent implements OnInit {
   }
 
   saveLibrary(modal?:any){
-      this.myservice.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
+      this.myService.postService(PracticeServicesService.practiceApiList.addLibrary,this.library).subscribe(response =>{
         if (response.status == 'SUCCESS') {
             this.getLibraries(response.payLoad.city.id);
           if (this.buttonText =='Create') {
@@ -163,7 +158,7 @@ export class LibraryComponent implements OnInit {
       })
   }
   updateLibrary(libraryId,modal?:any){
-    this.myservice.getService(PracticeServicesService.practiceApiList.getLibrary+libraryId).subscribe(response =>{
+    this.myService.getService(PracticeServicesService.practiceApiList.getLibrary+libraryId).subscribe(response =>{
       if (response.status == 'SUCCESS') {
       //  this.library.setData(response.payLoad);
       this.library = response.payLoad;
