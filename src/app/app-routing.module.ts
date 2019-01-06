@@ -22,7 +22,8 @@ const appRoutes: Routes = [
     path: 'library',
     children: [ //<---- child components declared here
       {
-        path: 'librarybooks',
+        // path: 'librarybooks/:id',
+        path: 'librarybooks', // For multiple optional params
         component: LibraryBooksComponent, canActivate: [LoginGaurdService]
       },
     ]

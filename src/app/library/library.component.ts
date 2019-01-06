@@ -1,7 +1,7 @@
 import { AppComponent } from './../app.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PracticeServicesService } from '../practice-services.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert2/dist/sweetalert2.js'
@@ -16,20 +16,20 @@ class Library {
   constructor(values?: any) {
     Object.assign(this, values);
   }
-  // setData(payload?: any) {
-  //   if (payload) {
-  //     this.name = payload.name;
-  //     this.address = payload.address;
-  //     this.isActive = payload.isActive;
-  //     this.cityId = payload.city.id;
-  //     this.id = payload.id;
-  //   } else {
-  //     this.name = '';
-  //     this.address = '';
-  //     this.isActive = true;
-  //     this.cityId = null;
-  //   }
-  // }
+ /* setData(payload?: any) {
+    if (payload) {
+      this.name = payload.name;
+      this.address = payload.address;
+      this.isActive = payload.isActive;
+      this.cityId = payload.city.id;
+      this.id = payload.id;
+    } else {
+      this.name = '';
+      this.address = '';
+      this.isActive = true;
+      this.cityId = null;
+    }
+  } */
 }
 
 @Component({
@@ -45,17 +45,22 @@ export class LibraryComponent implements OnInit {
   library = new Library();
   buttonText = "";
   cityId;
-  //##### Material UI Code
-  // dataSource: MatTableDataSource<any>;
-  // @ViewChild(MatSort) sort: MatSort;
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  // searchKey: string;
-  // columnsToDisplay: string[] = ['position', 'name', 'address','actions'];
+ /* ##### Material UI Code
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  searchKey: string;
+  columnsToDisplay: string[] = ['position', 'name', 'address','actions']; */
   constructor(private appcomp: AppComponent, private myService: PracticeServicesService,
-    private router: Router, private modalService: NgbModal, private toastr: ToastrService) { }
+    private router: Router, private modalService: NgbModal, private toastr: ToastrService,
+    private actRoter:ActivatedRoute ) { }
 
   ngOnInit() {
     this.getCities();
+    this.cityId = this.actRoter.snapshot.paramMap.get('cId')
+    if (this.cityId!=null) {
+      this.getLibraries(this.cityId)
+    }
   }
 
   getUserRole() {
@@ -70,17 +75,18 @@ export class LibraryComponent implements OnInit {
       this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
         this.librariesList = response.payLoad;
   
-        //##### Material UI Code
-        // this.dataSource = new MatTableDataSource(this.librariesList)
-        // this.dataSource.sort = this.sort;
-        // this.dataSource.paginator = this.paginator;
+       /* ##### Material UI Code
+        this.dataSource = new MatTableDataSource(this.librariesList)
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator; */
       })
     }
     }
     else
     {
+      this.cityId = event;
       this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event).subscribe(response => {
-        this.librariesList = response.payLoad;
+      this.librariesList = response.payLoad;
       })
     }
   }
@@ -134,7 +140,10 @@ export class LibraryComponent implements OnInit {
   }
 
   getAllLibraryBooks(libraryId) {
-    this.router.navigateByUrl("library/librarybooks?libId=" + libraryId)
+    this.router.navigate(['library/librarybooks',{id:libraryId,cId:this.cityId}]) 
+    //Optional routing to pass multiple optional params
+
+    // this.router.navigate(['library/librarybooks',libraryId])
   }
 
   getCities() {
