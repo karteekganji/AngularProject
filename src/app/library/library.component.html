@@ -29,7 +29,7 @@
   <div class="containeralign form-group">
     <p class="alignCenter"> Select your location : </p>
     <select class="form-control css1" id="Id" #Id="ngModel" [(ngModel)]="cityId" name="Id" (change)=getLibraries($event)>
-      <option disabled selected [ngValue]="undefined"> Select City</option>
+      <option disabled selected [ngValue]="null"> Select City</option>
       <option *ngFor="let city of getCities()"  [value]="city.id">{{city.cityName}}</option>
     </select>
     <button type="submit" class="btn btn-primary" (click)="open(content,'Create')">Create Library</button>
@@ -83,7 +83,7 @@
           </div>
         <div class="input-group">
           <select class="form-control" name="cityId" #cityId="ngModel" required [(ngModel)]="library.cityId">
-            <option disabled selected [ngValue]="undefined"> Select City</option>
+            <option disabled selected [value]="undefined"> Select City</option>
             <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
           </select>
         </div>

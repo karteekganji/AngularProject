@@ -11,7 +11,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./library-books.component.css']
 })
 export class LibraryBooksComponent implements OnInit {
-  libraryBooksList:any=[];
+  libraryBooksList: any = [];
   libraryName;
   libId;
   cityId;
@@ -24,12 +24,21 @@ export class LibraryBooksComponent implements OnInit {
       this.libId = params['libId'];
     }); */ // Code for fetching request params by key
 
-    this.libId = this.actRoter.snapshot.paramMap.get('id') // Another way for fetching request params by key
-    this.cityId = this.actRoter.snapshot.paramMap.get('cId') //when using multiple params
+
+    if (this.actRoter.snapshot.paramMap.get('data')) {
+      let obj: any = JSON.parse(atob(this.actRoter.snapshot.paramMap.get('data'))) // For Decoding query params
+      this.libId = obj.id // Another way for fetching request params by key
+      this.cityId = obj.cId //when using multiple params
+    }
+    // this.libId = this.actRoter.snapshot.paramMap.get('id') // Another way for fetching request params by key
+    // this.cityId = this.actRoter.snapshot.paramMap.get('cId') //when using multiple params
+
+
+
     this.getAllLibraryBooks()
   }
   getAllLibraryBooks() {
-    
+
     this.myService.getService(PracticeServicesService.practiceApiList.getLibraryBooks + this.libId).subscribe(response => {
       if (response.status == 'SUCCESS') {
         this.libraryBooksList = response.payLoad.bookDetails;
@@ -41,7 +50,11 @@ export class LibraryBooksComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(["library",{cId:this.cityId}]);
+
+    let obj = btoa(JSON.stringify({ cId: this.cityId }))  // For encoding Query params
+    this.router.navigate(['library', { data: obj }])
+
+    // this.router.navigate(['library',{cId:this.cityId}]); 
   }
-  
+
 }
