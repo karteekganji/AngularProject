@@ -73,7 +73,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form data-toggle="validator" #libraryForm="ngForm">
       <div class="form-group">
         <div class="input-group">
           <input type="text" class="form-control" name="name" #name="ngModel" required placeholder="Library Name" [(ngModel)]="library.name">
@@ -107,7 +107,7 @@
         </div>
       </div>
       <div class="modal-footer">
-          <button type="submit" class="btn btn-outline-dark" (click) = "saveLibrary(modal)">{{buttonText}}</button>
+          <button type="submit" class="btn btn-outline-dark" [disabled]="libraryForm.invalid" (click) = "saveLibrary(modal)">{{buttonText}}</button>
         </div>
         
     </form>

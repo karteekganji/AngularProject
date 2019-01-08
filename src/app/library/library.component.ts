@@ -41,7 +41,6 @@ class Library {
 export class LibraryComponent implements OnInit {
   librariesList: any = [];
   closeResult: string;
-  formdata;
   library = new Library();
   buttonText = "";
   cityId;
@@ -149,7 +148,7 @@ export class LibraryComponent implements OnInit {
 
     let obj = btoa(JSON.stringify({ id: libraryId, cId: this.cityId }))
 
-    this.router.navigate(['library/librarybooks', { data: obj }]) // For encoding Query params
+    this.router.navigate(['librarybooks',{ data: obj }],{relativeTo:this.actRoter}) // For encoding Query params
 
     // this.router.navigate(['library/librarybooks',{id:libraryId,cId:this.cityId}]) 
     //Optional routing to pass multiple optional params
