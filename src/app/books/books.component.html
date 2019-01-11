@@ -1,5 +1,6 @@
 <div class="back" align=center>
   <span><b>Available Books</b></span>
+  <button type="submit" class="btn btn-primary" (click)="open(content,'Create')">Create Book</button>
 </div>
 <table datatable *ngIf="booksList.length; else messageall">
   <thead>

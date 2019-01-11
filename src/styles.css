@@ -51,7 +51,11 @@
   .app-form .btn.btn-secondary.reset {
       background: #f0543f none repeat scroll 0 0;
     }
-
+    .btn-primary {
+      color: #fff !important;
+      background-color: #ff9900 !important;
+      border-color: #ff9900 !important;
+  }
     table {
       width:100%; 
       border-collapse:collapse; 

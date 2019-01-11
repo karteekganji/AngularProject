@@ -22,12 +22,6 @@ color: blue;
     text-decoration: underline;
 }
 
-.btn-primary {
-    color: #fff !important;
-    background-color: #ff9900 !important;
-    border-color: #ff9900 !important;
-}
-
 table {
     width: 100%;
   }
