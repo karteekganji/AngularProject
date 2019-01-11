@@ -14,7 +14,7 @@
         </div>
         <div class="forgot">
           <a (click)="signUp()">Create account</a> or 
-          <a data-toggle="modal" data-target="#forgotpassword">Forgot password</a>
+          <a data-toggle="modal" data-target="#myModal">Forgot password</a>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
@@ -22,33 +22,32 @@
   </div>
 </div>
 
-<div id="forgotpassword" class="modal fade" role="dialog">
+<div id="myModal" class="modal fade in">
   <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-        <form role="form form-frame" #forgotPasswordForm="ngForm">
+      <div class="modal-content">
+
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title text-center">Forgot Password</h4>
+              <a class="btn btn-default" data-dismiss="modal"><i class="material-icons">
+                close
+                </i></a>
+              <h4 class="modal-title">Forgot Password</h4>
           </div>
           <div class="modal-body">
-            <!-- <div class="form-group">
-              <label for="exampleInputEmail1" class="form-lable-font"> Email Address</label>
-              <input type="email" class="form-control" placeholder="Enter Registered Email Address" [(ngModel)]="model.email" #emailAddress="ngModel">
-            </div> -->
-            <div class="form-group">
-                <label for="exampleInputEmail1" class="form-lable-font"> Email Address</label>
+            <form id="Login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
+              <div class="form-group">
+                <input type="email" class="form-control" name="name" placeholder="Enter Email">
               </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <div class="row">
-              <div class="text-center">
-                <button type="button" [disabled]="forgotPasswordForm.invalid" class="btn rfqPrintBtn" (click)="setForgotPassword(forgotPasswordForm)">Submit</button>
-                <button type="button" class="btn blue_button" data-dismiss="modal">Close</button>
+              <div class="btn-group">
+                  <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                  <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Send</button>
               </div>
-            </div>
           </div>
-        </form>
-    </div>
-  </div>
-</div>
+
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+
+
