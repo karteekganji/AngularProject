@@ -5,16 +5,22 @@
         <h2>Login</h2>
         <p>Please enter your email and password</p>
       </div>
-      <form id="Login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
+      <form id="Login" [formGroup]="loginFormData" (ngSubmit)="login(loginFormData.value)">
         <div class="form-group">
-          <input type="email" class="form-control" id="inputEmail" formControlName="email" placeholder="Email">
+          <input type="email" class="form-control" id="inputEmail"  formControlName="email" placeholder="Email">
         </div>
+        <div class="alertValalidation" *ngIf="loginFormData.get('email').touched && loginFormData.get('email').hasError('required')">
+          Email is required.
+      </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="inputPassword" formControlName="password" placeholder="Password">
+          <input type="password" class="form-control" id="inputPassword"  formControlName="password" placeholder="Password">
         </div>
-        <div class="forgot">
+        <div class="alertValalidation" *ngIf="loginFormData.get('password').touched && loginFormData.get('password').hasError('required')">
+          Password is required.
+      </div>
+        <div class="links">
           <a (click)="signUp()">Create account</a> or 
-          <a data-toggle="modal" data-target="#myModal">Forgot password</a>
+          <a data-toggle="modal" data-target="#forgotPassword">Forgot password?</a>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
       </form>
@@ -22,7 +28,7 @@
   </div>
 </div>
 
-<div id="myModal" class="modal fade in">
+<div id="forgotPassword" class="modal fade in">
   <div class="modal-dialog">
       <div class="modal-content">
 
@@ -33,21 +39,47 @@
               <h4 class="modal-title">Forgot Password</h4>
           </div>
           <div class="modal-body">
-            <form id="Login" [formGroup]="formdata" (ngSubmit)="login(formdata.value)">
+            <form *ngIf="!showConfirmFields">
               <div class="form-group">
-                <input type="email" class="form-control" name="name" placeholder="Enter Email">
+                <input type="forgotPwdEmail" class="form-control" name="forgotPwdEmail" required [(ngModel)] = "forgotPwdEmail" placeholder="Enter Email">
               </div>
+            </form>
+            <div class="form-group">
+              <span *ngIf="passwordKey">Enter this key below : <b>{{passwordKey}}</b></span>
+            </div>
+            <form *ngIf="showConfirmFields" id="changePassword" [formGroup]="changePwdConFormData" (ngSubmit)="changePassword(changePwdConFormData.value)" >
+              {{changePwdConFormData.value| json}}
+              <div class="form-group">
+                <input type="text" class="form-control" formControlName="passwordKey"  placeholder="Key">
+              </div>
+              <div class="alertValalidation" *ngIf="changePwdConFormData.get('passwordKey').touched && changePwdConFormData.get('passwordKey').hasError('required')">
+                Key is required.
+            </div>
+              <div class="form-group">
+                <input type="password" class="form-control" formControlName="password"  placeholder="New Password">
+              </div>
+              <div class="alertValalidation" *ngIf="changePwdConFormData.get('password').touched && changePwdConFormData.get('password').hasError('required')">
+                New Password is required.
+            </div>
+              <div class="form-group">
+                <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+              </div>
+              <div class="alertValalidation" *ngIf="changePwdConFormData.get('confirmPassword').touched && changePwdConFormData.get('confirmPassword').hasError('required')">
+                Confirm Password is required.
+            </div>
+            <div class="alertValalidation" *ngIf="changePwdConFormData.get('confirmPassword').touched && changePwdConFormData.get('password') != changePwdConFormData.get('confirmPassword')">
+              Password not matched.
+          </div>
             </form>
           </div>
           <div class="modal-footer">
               <div class="btn-group">
-                  <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                  <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Send</button>
+                  <button class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button *ngIf="!showConfirmFields" class="btn btn-primary" (click)="forgotPassword(forgotPwdEmail)">Get Key</button>
+                  <button *ngIf="showConfirmFields" type="submit" class="btn btn-primary" [disabled]="changePwdConFormData.invalid" (click)="changePassword()">Submit</button>
               </div>
           </div>
 
       </div><!-- /.modal-content -->
   </div><!-- /.modal-dalog -->
 </div><!-- /.modal -->
-
-

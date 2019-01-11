@@ -12,19 +12,32 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(public myservice: PracticeServicesService, private router: Router,
+  constructor(public myService: PracticeServicesService, private router: Router,
     private toastr: ToastrService, private appcomp: AppComponent) { }
   librariesList: any = [];
-  formdata;
+  loginFormData;
+  changePwdConFormData;
+  passwordKey="";
+  forgotPwdEmail:String = "";
+  showConfirmFields:boolean = false;
   ngOnInit() {
     this.loginData();
+    this.changePasswordData();
   }
 
 
   loginData() {
-    this.formdata = new FormGroup({
-      email: new FormControl("email@admin.com"),
-      password: new FormControl("admin")
+    this.loginFormData = new FormGroup({
+      email: new FormControl("email@admin.com", [Validators.required]),
+      password: new FormControl("admin", [Validators.required])
+    });
+  }
+
+  changePasswordData() {
+    this.changePwdConFormData = new FormGroup({
+      passwordKey: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required])
     });
   }
 
@@ -35,7 +48,7 @@ export class LoginComponent implements OnInit {
     return this.appcomp.getAuthtoken();
   }
   login(data) {
-    this.myservice.postService(PracticeServicesService.practiceApiList.login, data).subscribe(response => {
+    this.myService.postService(PracticeServicesService.practiceApiList.login, data).subscribe(response => {
       if (response.status == "SUCCESS") {
         localStorage.setItem("Auth-Token", response.payLoad.userDetails.auth)
         localStorage.setItem("Role", response.payLoad.userDetails.role)
@@ -50,6 +63,19 @@ export class LoginComponent implements OnInit {
 
   signUp() {
     this.router.navigateByUrl("signup")
+  }
+
+  forgotPassword(email:String){
+    this.myService.getService(PracticeServicesService.practiceApiList.forgotPassword+email).subscribe(response =>{
+      if (response.status == 'SUCCESS') {
+        this.passwordKey = response.payLoad.passwordKey;
+        this.showConfirmFields = true;
+        console.log(this.showConfirmFields)
+      }
+      else{
+        this.toastr.error(response.errorMessage)
+      }
+    })
   }
 
 }

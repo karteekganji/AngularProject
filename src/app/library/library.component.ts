@@ -78,7 +78,7 @@ export class LibraryComponent implements OnInit {
       if (event.target.value) {
         this.router.navigateByUrl("library")
         this.cityId = event.target.value;
-        this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event.target.value).subscribe(response => {
+        this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + event.target.value).subscribe(response => {
           this.librariesList = response.payLoad;
 
           /* ##### Material UI Code

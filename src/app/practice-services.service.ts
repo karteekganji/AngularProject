@@ -22,13 +22,15 @@ export class PracticeServicesService {
     getCities: "get-cities",
     getAllBooks: "get-all-books",
     login: "login",
-    getLibraries: "get-all-library",
+    getLibraries: "get-all-library?cityId=",
     deleteLibrary: "admin/delete-library/",
     getLibrary:"get-library/",
     addLibrary:"admin/add-library",
     getLibraryBooks: "library-books/",
     signUp: "signup",
     logOut: "logout",
+    forgotPassword:"forgot-password?emailId="
+
   }
 
   getService(url) {
