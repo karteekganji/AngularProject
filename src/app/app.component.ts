@@ -14,11 +14,7 @@ export class AppComponent implements OnInit {
   form: FormGroup;
   citiesList = [];
   ngOnInit() {
-    this.getCities();
-    setTimeout(() => {
-
-    }, 500);
-
+  this.getCities();
   }
   getUserRole() {
     return localStorage.getItem("Role");
@@ -26,6 +22,7 @@ export class AppComponent implements OnInit {
   getAuthtoken(){
     return localStorage.getItem("Auth-Token")
   }
+  
   getCities() {
     return this.myservice.getService(PracticeServicesService.practiceApiList.getCities).subscribe(respose => {
       this.citiesList = respose.payLoad;

@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
      private appcomp:AppComponent, private toastr:ToastrService) { }
   getGenders: any = ["MALE", "FEMALE", "OTHERS"];
   ngOnInit() {
+    this.getCities();
     this.signUpData();
   }
   signUpData() {

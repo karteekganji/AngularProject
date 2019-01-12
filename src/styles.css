@@ -78,6 +78,11 @@
     content:"*";
     color: red;
   }
+  .clrRed{
+    color: red;
+    text-align: center;
+  }
+
 .hide{
   display: none
 }
@@ -85,6 +90,8 @@ mat-footer-row mat-footer-cell {
   justify-content: center;
   font-style: italic;
 }
+
+
 
 .outline button:focus{
 outline: 0px auto -webkit-focus-ring-color !important;

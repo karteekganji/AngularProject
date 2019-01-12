@@ -7,13 +7,15 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
+import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import swal from 'sweetalert2/dist/sweetalert2.js'
 declare var swal: any;
 @Injectable()
 export class PracticeServicesService {
   httpdata;
   baseUrl = Constants.Base_URL;
-  constructor(private http: HttpClient, private toastr: ToastrService) {
+  
+  constructor(private http: HttpClient, private toastr: ToastrService, private modalService: NgbModal) {
   }
   ngOnInit() {
 
@@ -29,7 +31,8 @@ export class PracticeServicesService {
     getLibraryBooks: "library-books/",
     signUp: "signup",
     logOut: "logout",
-    forgotPassword:"forgot-password?emailId="
+    forgotPassword:"forgot-password?emailId=",
+    resetPassword:"reset-password"
 
   }
 
@@ -95,5 +98,15 @@ export class PracticeServicesService {
 
   handleError(error: HttpErrorResponse) {
     return Observable.throw(error.message || "Server Error");
+  }
+
+   getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 }

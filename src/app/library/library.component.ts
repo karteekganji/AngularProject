@@ -55,8 +55,7 @@ export class LibraryComponent implements OnInit {
     private actRoter: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getCities();
-
+    
     if (this.actRoter.snapshot.paramMap.get('data')) {
       let obj: any = JSON.parse(atob(this.actRoter.snapshot.paramMap.get('data')))
       this.cityId = obj.cId;
@@ -90,7 +89,7 @@ export class LibraryComponent implements OnInit {
     }
     else {
       this.cityId = event;
-      this.myService.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityId=" + event).subscribe(response => {
+      this.myService.getService(PracticeServicesService.practiceApiList.getLibraries+ event).subscribe(response => {
         this.librariesList = response.payLoad;
       })
     }
@@ -131,19 +130,10 @@ export class LibraryComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.closeResult = `Dismissed ${this.myService.getDismissReason(reason)}`;
     });
   }
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
-
+ 
   getAllLibraryBooks(libraryId) {
 
     let obj = btoa(JSON.stringify({ id: libraryId, cId: this.cityId }))

@@ -1,6 +1,5 @@
-<div class="back" align=center>
-  <span><b>Available Books</b></span>
-  <button type="submit" class="btn btn-primary" (click)="open(content,'Create')">Create Book</button>
+<div align=center>
+  <button type="submit" class="btn btn-primary createBookBtn" (click)="open(content,'Create')">Create Book</button>
 </div>
 <table datatable *ngIf="booksList.length; else messageall">
   <thead>
@@ -30,3 +29,53 @@
 <ng-template #messageall>
   <h3 class="clrRed">No Books available!</h3>
 </ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Library</h4>
+      <button type="button" class="close outline" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form data-toggle="validator" #bookForm="ngForm">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" name="title" #title="ngModel" required placeholder="Book Name" [(ngModel)]="book.title">
+          </div>
+          <div *ngIf="(title.touched && title.invalid)">
+              <span class="alertValalidation">*Name Required</span>
+            </div>
+          <!-- <div class="input-group">
+            <select class="form-control" name="cityId" #cityId="ngModel" required [(ngModel)]="library.cityId">
+              <option disabled selected [value]="undefined"> Select City</option>
+              <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
+            </select>
+          </div>
+          <div *ngIf="(cityId.touched && cityId.invalid)">
+            <span class="alertValalidation">*City Required</span>
+          </div> -->
+          <div class="input-group">
+            <input type="text" class="form-control" #description="ngModel" name="description" required [(ngModel)]="book.description" required placeholder="Book Description">
+          </div>
+          <div *ngIf="(description.touched && description.invalid)">
+            <span class="alertValalidation">*Description Required</span>
+          </div>
+          <div class="input-group radio-css">
+              <label>Status : &nbsp; </label>
+            <label class="radio-inline">
+              <input type="radio" name="isActive" [value]="true" required [(ngModel)]="book.isActive">Active &nbsp;
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="isActive" [value]="false"  required [(ngModel)]="book.isActive">InActive &nbsp;
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid" (click) = "saveLibrary(modal)">{{buttonText}}</button>
+          </div>
+          
+      </form>
+    </div>
+    
+  </ng-template>

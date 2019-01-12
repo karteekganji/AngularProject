@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder }
   from '@angular/forms';
 import { AppComponent } from '../app.component';
-
+declare var jQuery:any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,9 +17,10 @@ export class LoginComponent implements OnInit {
   librariesList: any = [];
   loginFormData;
   changePwdConFormData;
-  passwordKey="";
-  forgotPwdEmail:String = "";
+  passwordKey='';
+  forgotPwdEmailId:String = '';
   showConfirmFields:boolean = false;
+ 
   ngOnInit() {
     this.loginData();
     this.changePasswordData();
@@ -70,7 +71,21 @@ export class LoginComponent implements OnInit {
       if (response.status == 'SUCCESS') {
         this.passwordKey = response.payLoad.passwordKey;
         this.showConfirmFields = true;
-        console.log(this.showConfirmFields)
+        this.forgotPwdEmailId = '';
+      }
+      else{
+        this.toastr.error(response.errorMessage)
+      }
+    })
+  }
+
+  resetPassword(data){
+    this.myService.postService(PracticeServicesService.practiceApiList.resetPassword, data).subscribe(response =>{
+      if (response.status == 'SUCCESS') {
+        this.toastr.success(response.errorMessage)
+        jQuery("#forgotPassword").modal("hide");
+        this.showConfirmFields = false;
+        this.changePwdConFormData.reset();
       }
       else{
         this.toastr.error(response.errorMessage)

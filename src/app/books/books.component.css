@@ -15,15 +15,41 @@
     display: table;
     clear: both;
   }
-  .clrRed{
-    color: red;
-    text-align: center;
+  .createBookBtn{
+    margin-top: 25px;
   }
-  .back{
-    margin: 15px 0px 10px 0px
-  } 
 
-  .back button{
-    padding: 0px 3px;
-    margin-left: 36px;
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+.containeralign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+table {
+    width: 100%;
   }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .noData{
+      color: red;
+      font-weight: bold;
+  }
+
+  .input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    margin-bottom: 8px;
+}
+.radio-css{
+    margin: 6px 25%;
+}
+button:focus {
+    outline: 0px auto -webkit-focus-ring-color !important;
+}

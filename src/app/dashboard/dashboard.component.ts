@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   
   constructor(private appcomp:AppComponent,private myservice: PracticeServicesService, private router: Router) { }
   ngOnInit() {
-  
+  this.getCities();
   }
   getLibraries(event) {
     this.myservice.getService(PracticeServicesService.practiceApiList.getLibraries + "?cityName=" + event.target.value).subscribe(response => {

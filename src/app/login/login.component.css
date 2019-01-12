@@ -35,6 +35,7 @@ margin-bottom:20px;
 }
 .modal .modal-footer .btn-group > .btn:first-child {
   border-bottom-left-radius: 0;
+  margin-right: 10px;
 }
 .modal .modal-footer .btn-group > .btn:last-child {
   border-top-right-radius: 0;
