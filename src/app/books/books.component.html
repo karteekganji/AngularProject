@@ -11,6 +11,7 @@
       <th>Category</th>
       <th>Publisher</th>
       <th>Copies Available</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,14 @@
       <td>{{data.categoryName}}</td>
       <td>{{data.publisherName}}</td>
       <td> {{data.copies}}</td>
+      <td class="outline">
+        <button mat-icon-button (click)="open(content,'Update');updateBook(data.bookId,modal)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(data.bookId)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -30,10 +39,10 @@
   <h3 class="clrRed">No Books available!</h3>
 </ng-template>
 
-<ng-template #content let-modal>
+<ng-template #content let-bookModel>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Library</h4>
-      <button type="button" class="close outline" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Book</h4>
+      <button type="button" class="close outline" aria-label="Close" (click)="bookModel.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -46,15 +55,34 @@
           <div *ngIf="(title.touched && title.invalid)">
               <span class="alertValalidation">*Name Required</span>
             </div>
-          <!-- <div class="input-group">
-            <select class="form-control" name="cityId" #cityId="ngModel" required [(ngModel)]="library.cityId">
-              <option disabled selected [value]="undefined"> Select City</option>
-              <option *ngFor="let city of getCities()" [value]="city.id">{{city.cityName}}</option>
+          <div class="input-group">
+            <select class="form-control" name="categoryId" #categoryId="ngModel" required [(ngModel)]="book.categoryId">
+              <option disabled selected [value]="undefined"> Select Catagory</option>
+              <option *ngFor="let catagory of categoryList" [value]="catagory.id">{{catagory.name | titlecase}}</option>
+            </select>
+            <select class="form-control" name="authorId" #authorId="ngModel" required [(ngModel)]="book.authorId">
+              <option disabled selected [value]="undefined"> Select Author</option>
+              <option *ngFor="let author of authorList" [value]="author.id">{{author.name | titlecase}}</option>
             </select>
           </div>
-          <div *ngIf="(cityId.touched && cityId.invalid)">
-            <span class="alertValalidation">*City Required</span>
-          </div> -->
+          <div >
+            <span *ngIf="(categoryId.touched && categoryId.invalid)" class="alertValalidation">*Catagory Required</span>
+            <span *ngIf="(authorId.touched && authorId.invalid)" class="seperateValidation alertValalidation">*Author Required</span>
+          </div>
+          <div class="input-group">
+            <select class="form-control" name="languageId" #languageId="ngModel" required [(ngModel)]="book.languageId">
+              <option disabled selected [value]="undefined"> Select Language</option>
+              <option *ngFor="let language of languageList" [value]="language.id">{{language.name | titlecase}}</option>
+            </select>
+            <select class="form-control" name="publisherId" #publisherId="ngModel" required [(ngModel)]="book.publisherId">
+              <option disabled selected [value]="undefined"> Select Publisher</option>
+              <option *ngFor="let publisher of publisherList" [value]="publisher.id">{{publisher.name | titlecase}}</option>
+            </select>
+          </div>
+          <div >
+            <span *ngIf="(languageId.touched && languageId.invalid)" class="alertValalidation">*Language Required</span>
+            <span *ngIf="(publisherId.touched && publisherId.invalid)" class="seperateValidation alertValalidation">*Publisher Required</span>
+          </div>
           <div class="input-group">
             <input type="text" class="form-control" #description="ngModel" name="description" required [(ngModel)]="book.description" required placeholder="Book Description">
           </div>
@@ -70,9 +98,12 @@
               <input type="radio" name="isActive" [value]="false"  required [(ngModel)]="book.isActive">InActive &nbsp;
             </label>
           </div>
+          <div class="input-group">
+            <input type="text" class="form-control" name="copies" #copies="ngModel" required placeholder="Copies" [(ngModel)]="book.copies">
+          </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid" (click) = "saveLibrary(modal)">{{buttonText}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid" (click) = "saveBook(bookModel)">{{buttonText}}</button>
           </div>
           
       </form>

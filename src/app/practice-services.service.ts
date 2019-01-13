@@ -23,6 +23,9 @@ export class PracticeServicesService {
   public static practiceApiList = {
     getCities: "get-cities",
     getAllBooks: "get-all-books",
+    getBook:"get-book/",
+    getBooksData: "admin/books-data",
+    addBook:"admin/add-book",
     login: "login",
     getLibraries: "get-all-library?cityId=",
     deleteLibrary: "admin/delete-library/",

@@ -34,12 +34,17 @@ export class BooksComponent implements OnInit {
   book = new Book();
   buttonText = "";
   closeResult: string;
+  categoryList:any = [];
+  authorList:any = [];
+  languageList:any = [];
+  publisherList:any = [];
   constructor(private router: Router, private actRoter: ActivatedRoute,
     private myService: PracticeServicesService,private modalService: NgbModal, private toastr: ToastrService) {
 
   }
   ngOnInit() {
     this.getAllBooks()
+    this.getBooksData()
   }
 
   getAllBooks() {
@@ -53,16 +58,58 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  open(content, text) {
+  getBooksData() {
+    this.myService.getService(PracticeServicesService.practiceApiList.getBooksData).subscribe(response => {
+      if (response.status == 'SUCCESS') {
+        this.authorList = response.payLoad.authors;
+        this.categoryList = response.payLoad.categories;
+        this.languageList = response.payLoad.languages;
+        this.publisherList = response.payLoad.publishers;
+      }
+      else {
+        this.toastr.error(response.errorMessage)
+      }
+    });
+  }
+
+  open(bookModel, text) {
     this.buttonText = text;
     if (this.buttonText == 'Create') {
       this.book = new Book();
     }
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(bookModel, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.myService.getDismissReason(reason)}`;
     });
+  }
+
+  saveBook(modal?: any) {
+    this.myService.postService(PracticeServicesService.practiceApiList.addBook, this.book).subscribe(response => {
+      if (response.status == 'SUCCESS') {
+        if (this.buttonText == 'Create') {
+          this.toastr.success("Book Added succesfully")
+        } else if (this.buttonText == 'Update') {
+          this.toastr.success("Book Updated succesfully")
+        }
+        if (modal)
+          modal.close();
+      } else {
+        this.toastr.error(response.errorMessage)
+      }
+    })
+  }
+  updateBook(bookId, modal?: any) {
+    this.myService.getService(PracticeServicesService.practiceApiList.getBook + bookId).subscribe(response => {
+      if (response.status == 'SUCCESS') {
+        //  this.library.setData(response.payLoad);
+        this.book = response.payLoad;
+        if (modal)
+          modal.close();
+      } else {
+        this.toastr.error(response.errorMessage)
+      }
+    })
   }
 
 }

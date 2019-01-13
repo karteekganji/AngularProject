@@ -32,7 +32,7 @@
       <option disabled selected [ngValue]="null"> Select City</option>
       <option *ngFor="let city of getCities()"  [value]="city.id">{{city.cityName}}</option>
     </select>
-    <button type="submit" class="btn btn-primary" (click)="open(content,'Create')">Create Library</button>
+    <button type="submit" class="btn btn-primary" (click)="open(libraryModel,'Create')">Create Library</button>
   </div>
   <table datatable *ngIf="librariesList.length">
     <thead>
@@ -65,7 +65,7 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #libraryModel let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Library</h4>
     <button type="button" class="close outline" aria-label="Close" (click)="modal.dismiss('Cross click')">

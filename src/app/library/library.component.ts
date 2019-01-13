@@ -122,12 +122,12 @@ export class LibraryComponent implements OnInit {
     }
     )
   }
-  open(content, text) {
+  open(libraryModel, text) {
     this.buttonText = text;
     if (this.buttonText == 'Create') {
       this.library = new Library();
     }
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(libraryModel, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.myService.getDismissReason(reason)}`;
