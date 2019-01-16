@@ -18,10 +18,10 @@
     <tr *ngFor="let data of booksList; index as i">
       <td>{{i+1}}</td>
       <td> {{data.title | titlecase}} </td>
-      <td>{{data.languageName}}</td>
-      <td>{{data.authorName}}</td>
-      <td>{{data.categoryName}}</td>
-      <td>{{data.publisherName}}</td>
+      <td>{{data.languageName | titlecase}}</td>
+      <td>{{data.authorName | titlecase}}</td>
+      <td>{{data.categoryName | titlecase}}</td>
+      <td>{{data.publisherName | titlecase}}</td>
       <td> {{data.copies}}</td>
       <td class="outline">
         <button mat-icon-button (click)="open(content,'Update');updateBook(data.bookId,modal)">
