@@ -1,3 +1,4 @@
+<div *ngIf="libraryBooksList.length">
 <div class="back" align=center>
   <span>Books Available at : <b>{{libraryName | titlecase}}</b></span>
   <button class="btn btn--outline-dark my-2 my-sm-0" (click)="goBack()">
@@ -32,4 +33,5 @@
 <ng-template #message>
   <h3 class="clrRed">No Books available in this Library!</h3>
 </ng-template>
+</div>
 </div>

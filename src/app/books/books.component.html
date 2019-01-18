@@ -1,6 +1,7 @@
 <div align=center>
   <button type="submit" class="btn btn-primary createBookBtn" (click)="open(content,'Create')">Create Book</button>
 </div>
+<div *ngIf="booksList.length">
 <table datatable *ngIf="booksList.length; else messageall">
   <thead>
     <tr>
@@ -38,7 +39,7 @@
 <ng-template #messageall>
   <h3 class="clrRed">No Books available!</h3>
 </ng-template>
-
+</div>
 <ng-template #content let-bookModel>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">{{buttonText}} Book</h4>
