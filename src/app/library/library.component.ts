@@ -4,7 +4,6 @@ import { PracticeServicesService } from '../practice-services.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import swal from 'sweetalert2/dist/sweetalert2.js'
 declare var swal: any;
 
 class Library {
@@ -110,8 +109,7 @@ export class LibraryComponent implements OnInit {
           } else {
             this.toastr.error(response.errorMessage)
           }
-        }
-        )
+        })
       } else if (result.dismiss === swal.DismissReason.cancel) {
         swal(
           'Canceled!',

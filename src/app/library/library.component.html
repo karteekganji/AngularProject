@@ -52,7 +52,7 @@
         <td *ngIf = "data.isActive">Active</td>
         <td *ngIf = "!data.isActive">Inactive</td>
         <td class="outline">
-          <button mat-icon-button (click)="open(content,'Update');updateLibrary(data.id,modal)">
+          <button mat-icon-button (click)="open(libraryModel,'Update');updateLibrary(data.id,modal)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="onDelete(data.id)">

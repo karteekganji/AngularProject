@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+declare var swal: any;
 class Book {
   public authorId: number
   public bookId: number
@@ -34,12 +34,12 @@ export class BooksComponent implements OnInit {
   book = new Book();
   buttonText = "";
   closeResult: string;
-  categoryList:any = [];
-  authorList:any = [];
-  languageList:any = [];
-  publisherList:any = [];
+  categoryList: any = [];
+  authorList: any = [];
+  languageList: any = [];
+  publisherList: any = [];
   constructor(private router: Router, private actRoter: ActivatedRoute,
-    private myService: PracticeServicesService,private modalService: NgbModal, private toastr: ToastrService) {
+    private myService: PracticeServicesService, private modalService: NgbModal, private toastr: ToastrService) {
 
   }
   ngOnInit() {
@@ -88,6 +88,7 @@ export class BooksComponent implements OnInit {
     this.myService.postService(PracticeServicesService.practiceApiList.addBook, this.book).subscribe(response => {
       if (response.status == 'SUCCESS') {
         if (this.buttonText == 'Create') {
+          this.getAllBooks();
           this.toastr.success("Book Added succesfully")
         } else if (this.buttonText == 'Update') {
           this.toastr.success("Book Updated succesfully")
@@ -112,4 +113,30 @@ export class BooksComponent implements OnInit {
     })
   }
 
+  onDelete(bookId) {
+    this.myService.showDeleteAlert().then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted!',
+          'Book has been deleted.',
+          'success'
+        )
+        this.myService.deleteService(PracticeServicesService.practiceApiList.deleteBook + bookId).subscribe(response => {
+          if (response.status == "SUCCESS") {
+            const item = this.booksList.find(item => item.id === bookId);
+            this.booksList.splice(this.booksList.indexOf(item));
+            this.toastr.success("Library deleted succesfully")
+          } else {
+            this.toastr.error(response.errorMessage)
+          }
+        })
+      } else if (result.dismiss === swal.DismissReason.cancel) {
+        swal(
+          'Canceled!',
+          'Your action has been cancelled',
+          'error'
+        )
+      }
+    })
+  }
 }
