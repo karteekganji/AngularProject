@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <select class="form-control" formControlName="cityName">
-                        <option [ngValue]="undefined">Select City</option>
+                        <option disabled value=""> Select City </option>
                         <option *ngFor="let city of getCities()" [value]="">{{city.cityName}}</option>
                     </select>
                 </div>

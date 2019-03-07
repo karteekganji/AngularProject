@@ -12,6 +12,7 @@
       <th>Category</th>
       <th>Publisher</th>
       <th>Copies Available</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,6 +25,8 @@
       <td>{{data.categoryName | titlecase}}</td>
       <td>{{data.publisherName | titlecase}}</td>
       <td> {{data.copies}}</td>
+      <td *ngIf = "data.isActive">Active</td>
+      <td *ngIf = "!data.isActive">Inactive</td>
       <td class="outline">
         <button mat-icon-button (click)="open(content,'Update');updateBook(data.bookId,modal)">
           <mat-icon>edit</mat-icon>
