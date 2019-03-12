@@ -1,3 +1,4 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { PracticeServicesService } from './../practice-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -88,7 +89,7 @@ export class BooksComponent implements OnInit {
     this.myService.postService(PracticeServicesService.practiceApiList.addBook, this.book).subscribe(response => {
       if (response.status == 'SUCCESS') {
         if (this.buttonText == 'Create') {
-          this.getAllBooks();
+          this.booksList.push(response.payLoad)
           this.toastr.success("Book Added succesfully")
         } else if (this.buttonText == 'Update') {
           this.toastr.success("Book Updated succesfully")
@@ -103,7 +104,7 @@ export class BooksComponent implements OnInit {
   updateBook(bookId, modal?: any) {
     this.myService.getService(PracticeServicesService.practiceApiList.getBook + bookId).subscribe(response => {
       if (response.status == 'SUCCESS') {
-        //  this.library.setData(response.payLoad);
+        this.booksList.push(response.payLoad)
         this.book = response.payLoad;
         if (modal)
           modal.close();

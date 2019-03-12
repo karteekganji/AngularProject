@@ -24,7 +24,7 @@ export class PracticeServicesService {
     getCities: "get-cities",
     getAllBooks: "get-all-books",
     getBook:"get-book/",
-    deleteBook : "delete-book/",
+    deleteBook : "admin/delete-book/",
     getBooksData: "admin/books-data",
     addBook:"admin/add-book",
     login: "login",
